@@ -1,13 +1,13 @@
-package com.project.farmacia.services;
+package com.proj.farmacia.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.farmacia.dtos.categoria.CreateCategoriaDto;
-import com.project.farmacia.entities.Categoria;
-import com.project.farmacia.repositories.CategoriaRepository;
+import com.proj.farmacia.dtos.categoria.CreateCategoriaDto;
+import com.proj.farmacia.entities.Categoria;
+import com.proj.farmacia.repositories.CategoriaRepository;
 
 @Service
 public class CategoriaService {
