@@ -1,19 +1,14 @@
 spring:
-  
+  docker:
+    compose:
+      enabled: true
   datasource:
     url: jdbc:mysql://localhost:3306/mydatabase
     username: myuser
     password: secret
     hikari:
       maximum-pool-size: 10 # Ajuste o tamanho máximo do pool conforme necessário
-    
-  h2:
-    console:
-      enabled: false # Desative o console H2 para evitar conflitos com o MySQL
   jpa:
     hibernate:
-      dialect: org.hibernate.dialect.MySQLDialect
-      jdbc.batch_size: 25 # Ajuste o tamanho do lote conforme necessário
-      use-new-id-generator-mappings: true
       ddl-auto: create # Defina a estratégia de criação/atualização das tabelas (pode ser 'create', 'update', etc.)
     show-sql: true # Ative para mostrar as consultas SQL no console (útil para depuração)
