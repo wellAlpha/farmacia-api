@@ -1,9 +1,9 @@
 spring:
   docker:
     compose:
-      enabled: true
+      enabled: false #desabilite ao usar para gerar imagens
   datasource:
-    url: jdbc:mysql://localhost:3306/mydatabase
+    url: jdbc:mysql://mysqldb:3306/mydatabase
     username: myuser
     password: secret
     hikari:

@@ -9,26 +9,33 @@ services:
       - 'MYSQL_USER=myuser'
     ports:
       - '3306:3306'
+    volumes:
+       - farmacia-volume:/var/lib/mysql
     networks:
       - banco
+    restart: always
   app:
     build:
       context: .
     ports:
       - '80:8080'
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/mydatabase
-      - SPRING_DATASOURCE_USERNAME=myuser
-      - SPRING_DATASOURCE_PASSWORD=secret
+    #environment:
+      # - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/mydatabase
+      # - SPRING_DATASOURCE_USERNAME=myuser
+      # - SPRING_DATASOURCE_PASSWORD=secret
     networks:
       - default
       - banco
     depends_on:
        - mysqldb
-  
+    restart: always
 
+volumes:
+  farmacia-volume:
 networks:
   default:
   banco:
     internal: true
 
+
+  
