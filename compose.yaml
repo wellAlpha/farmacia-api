@@ -1,5 +1,6 @@
+version: '3.4'
 services:
-  mysql:
+  mysqldb:
     image: 'mysql:latest'
     environment:
       - 'MYSQL_DATABASE=mydatabase'
@@ -8,3 +9,26 @@ services:
       - 'MYSQL_USER=myuser'
     ports:
       - '3306:3306'
+    networks:
+      - banco
+  app:
+    build:
+      context: .
+    ports:
+      - '80:8080'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=myuser
+      - SPRING_DATASOURCE_PASSWORD=secret
+    networks:
+      - default
+      - banco
+    depends_on:
+       - mysqldb
+  
+
+networks:
+  default:
+  banco:
+    internal: true
+
