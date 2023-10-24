@@ -28,7 +28,7 @@ volumes:
 networks:
   default:
   banco:
-    internal: true
+    #internal: true
 
 
   
