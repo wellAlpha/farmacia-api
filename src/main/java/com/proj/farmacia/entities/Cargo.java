@@ -1,6 +1,10 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Cargo {
@@ -8,6 +12,9 @@ public class Cargo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@NotBlank(message = "nome {notblank}")
+	@NotNull(message = "nome {notnull}")
+	@Length(max = 100, message = "nome {len}")
 	@Column(nullable = false, length = 100)
 	private String nome;
 
