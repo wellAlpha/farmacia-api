@@ -1,8 +1,8 @@
 package com.proj.farmacia.entities;
 
 import org.hibernate.validator.constraints.Length;
-
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,7 +22,7 @@ public class Cliente {
 	@NotBlank(message = "cpf {notblank}")
 	@NotNull(message = "cpf {notnull}")
 	@Length(max = 15, message = "cpf {len}")
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 15, unique = true)
 	private String cpf;
 	
 	@NotBlank(message = "celular {notblank}")
@@ -40,17 +40,15 @@ public class Cliente {
 
 	@Column(nullable = false)
 	private Boolean ativo = true;
-	
-	// @Column(nullable = false)
-	// private Integer endereco_id;
 
-	@OneToOne()
-//    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	// @NotNull(message = "endereço {notnull}")
+	@Valid
     private Endereco endereco;
 	
 	
-	public Cliente() {
-	}
+	public Cliente() {}
 
 
 	public Cliente(String nome, String cpf, String celular, String email, Boolean ativo, Endereco endereco) {
@@ -79,7 +77,7 @@ public class Cliente {
 
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf;
+		this.cpf = cpf.replaceAll("[\\.\\-]", "");
 	}
 
 

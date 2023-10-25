@@ -31,16 +31,16 @@ public class Endereco {
 	@Column(nullable = false, length = 30)
 	private String municipio;
 
-	@NotBlank(message = "número {notblank}")
-	@NotNull(message = "número {notnull}")
+	// @NotBlank(message = "número {notblank}")
+	// @NotNull(message = "número {notnull}")
 	@Length(max = 10, message = "número {len}")
-	@Column(nullable = false, length = 10)
+	@Column(nullable = true, length = 10)
 	private String numero;
 
-	@NotBlank(message = "complemento {notblank}")
-	@NotNull(message = "complemento {notnull}")
+	//@NotBlank(message = "complemento {notblank}")
+	//@NotNull(message = "complemento {notnull}")
 	@Length(max = 100, message = "complemento {len}")
-	@Column(nullable = false, length = 100)
+	@Column(nullable = true, length = 100)
 	private String complemento;
 
 	@NotBlank(message = "bairro {notblank}")
@@ -58,8 +58,7 @@ public class Endereco {
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
-	public Endereco() {
-	}
+	public Endereco() {}
 
 	public Endereco(String logradouro, String cep, String municipio, String numero, String complemento, String bairro,
 			String estado) {
@@ -85,7 +84,7 @@ public class Endereco {
 	}
 
 	public void setCep(String cep) {
-		this.cep = cep;
+		this.cep = cep.replaceAll("[\\.\\-]", "");
 	}
 
 	public String getMunicipio() {
