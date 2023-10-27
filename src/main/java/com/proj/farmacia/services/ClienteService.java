@@ -18,7 +18,12 @@ public class ClienteService {
 		return clientes;
 	}
 	
-	public Cliente create (Cliente newCliente) {
+	public Cliente create (Cliente newCliente) throws Exception {
+		Cliente cliente = clienteRepository.findByCpf(newCliente.getCpf());
+		
+		if (cliente != null) {
+			throw new Exception("Já existe um cliente cadastrado com este CPF.");
+		}
 		Cliente clientes = clienteRepository.save(newCliente);
 
 		return clientes;

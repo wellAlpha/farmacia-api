@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Endereco {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@NotBlank(message = "logradouro {notblank}")

@@ -1,6 +1,7 @@
 package com.proj.farmacia.entities;
 
 import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -10,7 +11,7 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 public class Cliente {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@NotBlank(message = "nome {notblank}")

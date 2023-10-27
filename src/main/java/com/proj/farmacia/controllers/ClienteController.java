@@ -31,13 +31,9 @@ public class ClienteController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Cliente> create(@RequestBody @Valid Cliente cliente){
-		try {
+	public ResponseEntity<Cliente> create(@RequestBody @Valid Cliente cliente) throws Exception{
 			return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(clienteService.create(cliente));
-		} catch (Exception e) {
-			throw e;
-		}
 	}
 }
