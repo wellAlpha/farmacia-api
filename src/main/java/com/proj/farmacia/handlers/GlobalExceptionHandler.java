@@ -11,6 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.proj.farmacia.exceptions.BadRequestException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -21,11 +23,11 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
     
-    // @ExceptionHandler(UserNotFoundException.class)
-    // public ResponseEntity<Map<String, List<String>>> handleNotFoundException(UserNotFoundException ex) {
-    //     List<String> errors = Collections.singletonList(ex.getMessage());
-    //     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
-    // }
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Map<String, List<String>>> handleNotFoundException(BadRequestException ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {

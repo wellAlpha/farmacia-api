@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proj.farmacia.entities.Cliente;
+import com.proj.farmacia.exceptions.BadRequestException;
 import com.proj.farmacia.repositories.ClienteRepository;
 
 @Service
 public class ClienteService {
 	@Autowired ClienteRepository clienteRepository;
 
-	public List<Cliente> list () {
+	public List<Cliente> listAtivos () {
 		List<Cliente> clientes = clienteRepository.findByAtivoTrue();
 
 		return clientes;
@@ -22,7 +23,7 @@ public class ClienteService {
 		Cliente cliente = clienteRepository.findByCpf(newCliente.getCpf());
 		
 		if (cliente != null) {
-			throw new Exception("Já existe um cliente cadastrado com este CPF.");
+			throw new BadRequestException("Já existe um cliente cadastrado com este CPF.");
 		}
 		Cliente clientes = clienteRepository.save(newCliente);
 
