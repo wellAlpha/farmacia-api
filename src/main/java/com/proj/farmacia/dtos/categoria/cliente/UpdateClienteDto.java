@@ -2,7 +2,6 @@ package com.proj.farmacia.dtos.categoria.cliente;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.proj.farmacia.dtos.categoria.endereco.CreateEnderecoDto;
 import com.proj.farmacia.dtos.categoria.endereco.UpdateEnderecoDto;
 
 import jakarta.validation.Valid;

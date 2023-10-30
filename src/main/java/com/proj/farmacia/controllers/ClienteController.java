@@ -23,7 +23,6 @@ import com.proj.farmacia.services.ClienteService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
-import jakarta.websocket.server.PathParam;
 
 @Validated
 @RestController()
