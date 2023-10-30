@@ -52,12 +52,11 @@ public class Cliente {
 	public Cliente() {}
 
 
-	public Cliente(String nome, String cpf, String celular, String email, Boolean ativo, Endereco endereco) {
+	public Cliente(String nome, String cpf, String celular, String email, Endereco endereco) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.celular = celular;
 		this.email = email;
-		this.ativo = ativo;
 		this.endereco = endereco;
 	}
 

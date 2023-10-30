@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.proj.farmacia.dtos.categoria.cliente.CreateClienteDto;
 import com.proj.farmacia.entities.Cliente;
+import com.proj.farmacia.entities.Endereco;
 import com.proj.farmacia.services.ClienteService;
 
 import jakarta.validation.Valid;
@@ -34,16 +36,16 @@ public class ClienteController {
 	}
 	
 	@PostMapping()
-	public ResponseEntity<Cliente> create(@RequestBody @Valid Cliente cliente) throws Exception{
+	public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDto clienteDto) throws Exception{
 			return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.body(clienteService.create(cliente));
+				.body(clienteService.create(clienteDto));
 	}
 
 	@PutMapping()
 	public ResponseEntity<Cliente> update(@PathParam("id") @Positive long id, @RequestBody @Valid Cliente cliente) throws Exception{
 			return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(clienteService.create(cliente));
+				.body(clienteService.update(cliente));
 	}
 }
