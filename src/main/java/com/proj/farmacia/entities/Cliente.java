@@ -1,5 +1,6 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Where(clause = "ativo = true")
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,9 +44,8 @@ public class Cliente {
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
-	// @NotNull(message = "endereço {notnull}")
 	@Valid
     private Endereco endereco;
 	
@@ -54,7 +55,7 @@ public class Cliente {
 
 	public Cliente(String nome, String cpf, String celular, String email, Endereco endereco) {
 		this.nome = nome;
-		this.cpf = cpf;
+		this.cpf = cpf.replaceAll("[\\.\\-]", "");
 		this.celular = celular;
 		this.email = email;
 		this.endereco = endereco;
