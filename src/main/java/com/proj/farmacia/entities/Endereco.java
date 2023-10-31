@@ -3,9 +3,6 @@ package com.proj.farmacia.entities;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
 
 @Entity
 public class Endereco {
@@ -13,48 +10,32 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank(message = "logradouro {notblank}")
-	@NotNull(message = "logradouro {notnull}")
-	@Length(max = 100, message = "logradouro {len}")
 	@Column(nullable = false, length = 100)
 	private String logradouro;
 
-	@NotBlank(message = "cep {notblank}")
-	@NotNull(message = "cep {notnull}")
-	@Length(max = 10, message = "cep {len}")
 	@Column(nullable = false, length = 10)
 	private String cep;
 
-	@NotBlank(message = "município {notblank}")
-	@NotNull(message = "município {notnull}")
-	@Length(max = 30, message = "municipio {len}")
 	@Column(nullable = false, length = 30)
 	private String municipio;
 
-	@Length(max = 10, message = "número {len}")
 	@Column(nullable = true, length = 10)
 	private String numero;
-
-	@Length(max = 100, message = "complemento {len}")
+	
 	@Column(nullable = true, length = 100)
 	private String complemento;
 
-	@NotBlank(message = "bairro {notblank}")
-	@NotNull(message = "bairro {notnull}")
-	@Length(max = 50, message = "bairro {len}")
 	@Column(nullable = false, length = 50)
 	private String bairro;
 
-	@NotBlank(message = "estado {notblank}")
-	@NotNull(message = "estado {notnull}")
-	@Length(max = 50, message = "estado {len}")
 	@Column(nullable = false, length = 50)
 	private String estado;
 
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
-	public Endereco() {}
+	public Endereco() {
+	}
 
 	public Endereco(String logradouro, String cep, String municipio, String numero, String complemento, String bairro,
 			String estado) {

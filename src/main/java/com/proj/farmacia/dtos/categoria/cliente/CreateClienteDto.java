@@ -21,7 +21,6 @@ public class CreateClienteDto {
 	
 	@NotBlank(message = "celular {notblank}")
 	@NotNull(message = "celular {notnull}")
-	@Length(max = 11, message = "celular {len}")
 	private String celular;
 	
 	@NotBlank(message = "email {notblank}")

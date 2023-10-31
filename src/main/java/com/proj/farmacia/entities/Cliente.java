@@ -1,13 +1,16 @@
 package com.proj.farmacia.entities;
 
 import org.hibernate.annotations.Where;
-import org.hibernate.validator.constraints.Length;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Where(clause = "ativo = true")
@@ -16,28 +19,15 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotBlank(message = "nome {notblank}")
-	@NotNull(message = "nome {notnull}")
-	@Length(max = 150, message = "nome {len}")
 	@Column(nullable = false, length = 150)
 	private String nome;
 
-	@NotBlank(message = "cpf {notblank}")
-	@NotNull(message = "cpf {notnull}")
-	@Length(max = 15, message = "cpf {len}")
 	@Column(nullable = false, length = 15, unique = true)
 	private String cpf;
 	
-	@NotBlank(message = "celular {notblank}")
-	@NotNull(message = "celular {notnull}")
-	@Length(max = 11, message = "celular {len}")
 	@Column(nullable = false, length = 11)
 	private String celular;
 	
-	@NotBlank(message = "email {notblank}")
-	@NotNull(message = "email {notnull}")
-	@Email(message = "{email}")
-	@Length(max = 30)
 	@Column(nullable = false, length = 30)
 	private String email;
 
@@ -56,7 +46,7 @@ public class Cliente {
 	public Cliente(String nome, String cpf, String celular, String email, Endereco endereco) {
 		this.nome = nome;
 		this.cpf = cpf.replaceAll("[\\.\\-]", "");
-		this.celular = celular;
+		this.celular = celular.replaceAll("[-()\\s]", "");
 		this.email = email;
 		this.endereco = endereco;
 	}
@@ -88,7 +78,7 @@ public class Cliente {
 
 
 	public void setCelular(String celular) {
-		this.celular = celular;
+		this.celular = celular.replaceAll("[-()\\s]", "");
 	}
 
 

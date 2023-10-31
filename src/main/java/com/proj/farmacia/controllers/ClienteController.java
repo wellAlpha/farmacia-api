@@ -49,13 +49,13 @@ public class ClienteController {
 			return ResponseEntity.ok().body(clienteService.update(id, clienteDto));
 	}
 
-	@PatchMapping(path = "/desativar/{id}")
+	@PatchMapping(path = "/{id}")
 	public ResponseEntity<Void> desativar(@PathVariable @Positive Integer id) throws Exception{
 			clienteService.desativar(id);
 			return ResponseEntity.noContent().<Void>build();
 	}
 
-	@DeleteMapping(path = "/{id}")
+	@DeleteMapping(path = "/apagar-dados/{id}")
 	public ResponseEntity<Void> delete(@PathVariable @Positive Integer id) throws Exception{
 			clienteService.delete(id);
 			return ResponseEntity.noContent().<Void>build();
