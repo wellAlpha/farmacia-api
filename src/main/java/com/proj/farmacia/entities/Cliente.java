@@ -36,7 +36,6 @@ public class Cliente {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
-	@Valid
     private Endereco endereco;
 	
 	

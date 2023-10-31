@@ -1,10 +1,14 @@
 package com.proj.farmacia.entities;
 
+import java.util.ArrayList;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Cargo {
@@ -18,6 +22,9 @@ public class Cargo {
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
+	@OneToMany()
+	private ArrayList<Funcionario> funcionarios;
+	
 	public Cargo() {}
 
 	public Cargo(String nome) {
