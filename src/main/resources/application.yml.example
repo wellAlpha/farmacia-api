@@ -10,11 +10,10 @@ spring:
       maximum-pool-size: 10 # Ajuste o tamanho máximo do pool conforme necessário
   sql:
    init:
-     mode: always
-     #schema-locations: classpath:data.sql
+     mode: always #always || embedded || never
 
   jpa:
     hibernate:
       ddl-auto: create # Defina a estratégia de criação/atualização das tabelas (pode ser 'create', 'update', etc.)            
     show-sql: true # Ative para mostrar as consultas SQL no console (útil para depuração)
-    defer-datasource-initialization: true
+    defer-datasource-initialization: true # Inicializando dataSource depois da inserção

@@ -1,8 +1,10 @@
 package com.proj.farmacia.entities;
 
-import org.hibernate.validator.constraints.Length;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Endereco {
@@ -21,7 +23,7 @@ public class Endereco {
 
 	@Column(nullable = true, length = 10)
 	private String numero;
-	
+
 	@Column(nullable = true, length = 100)
 	private String complemento;
 
@@ -31,8 +33,6 @@ public class Endereco {
 	@Column(nullable = false, length = 50)
 	private String estado;
 
-	@Column(nullable = false)
-	private Boolean ativo = true;
 
 	public Endereco() {
 	}
@@ -102,14 +102,6 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
 	}
 
 	public Integer getId() {

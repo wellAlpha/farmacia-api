@@ -1,16 +1,17 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.Valid;
 
@@ -18,6 +19,7 @@ import jakarta.validation.Valid;
 
 @Entity
 @Where(clause = "ativo = true")
+@SQLDelete(sql = "UPDATE funcionario SET ativo = false WHERE id=?;")
 public class Funcionario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,12 +43,12 @@ public class Funcionario {
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
-    @ManyToOne()
-	@JoinColumn(name = "cargo_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "cargo_id", referencedColumnName = "id", nullable = false)
     private Cargo cargo;
 	
 	
@@ -62,7 +64,7 @@ public class Funcionario {
         this.email = email;
         this.passwordHash = passwordHash;
         this.endereco = endereco;
-        this.cargo = cargo;
+//         this.cargo = cargo;
     }
 
 
@@ -146,14 +148,14 @@ public class Funcionario {
     }
 
 
-    public Cargo getCargo() {
-        return cargo;
-    }
+    // public Cargo getCargo() {
+    //     return cargo;
+    // }
 
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
-    }
+    // public void setCargo(Cargo cargo) {
+    //     this.cargo = cargo;
+    // }
 	
     
 }

@@ -66,21 +66,6 @@ public class ClienteService {
 		return clienteUpdated;
 	}
 
-	public void desativar (Integer id) {
-		Optional<Cliente> clienteOp = clienteRepository.findById(id);
-		
-		if (clienteOp.isEmpty()) {
-			throw new BadRequestException("Este cliente não está cadastrado.");
-		}
-		Cliente cliente = clienteOp.get();
-		
-		cliente.setAtivo(false);
-		var endereco = cliente.getEndereco();
-		endereco.setAtivo(false);
-		
-		clienteRepository.save(cliente);
-	}
-
 	public void delete (Integer id) {
 		Optional<Cliente> clienteOp = clienteRepository.findById(id);
 		
@@ -88,10 +73,6 @@ public class ClienteService {
 			throw new BadRequestException("Este cliente não está cadastrado.");
 		}
 		Cliente cliente = clienteOp.get();
-		
-		cliente.setAtivo(false);
-		var endereco = cliente.getEndereco();
-		endereco.setAtivo(false);
 		
 		clienteRepository.delete(cliente);
 	}

@@ -1,5 +1,6 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import jakarta.persistence.CascadeType;
@@ -10,10 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.validation.Valid;
 
 @Entity
 @Where(clause = "ativo = true")
+@SQLDelete(sql = "UPDATE cliente SET ativo = false WHERE id=?;")
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +35,7 @@ public class Cliente {
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 	
