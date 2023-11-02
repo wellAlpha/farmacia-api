@@ -25,5 +25,6 @@ public class FuncionarioService {
 			throw new BadRequestException("Este cliente não está cadastrado.");
 		}
         funcionarioRepository.deleteById(id);
+        funcionarioRepository.save(null);
     }
 }

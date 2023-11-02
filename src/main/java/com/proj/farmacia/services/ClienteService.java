@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.proj.farmacia.dtos.categoria.cliente.CreateClienteDto;
 import com.proj.farmacia.dtos.categoria.cliente.UpdateClienteDto;
+import com.proj.farmacia.dtos.categoria.endereco.CreateEnderecoDto;
 import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.entities.Endereco;
 import com.proj.farmacia.exceptions.BadRequestException;
@@ -24,9 +25,26 @@ public class ClienteService {
 	}
 	
 	public Cliente create (CreateClienteDto clienteDto) throws Exception {
-		var enderecoDto = clienteDto.getEndereco();
-		Endereco endereco = new Endereco(enderecoDto.getLogradouro(), enderecoDto.getCep(), enderecoDto.getMunicipio(), enderecoDto.getNumero(), enderecoDto.getComplemento(), enderecoDto.getBairro(), enderecoDto.getEstado());
-		var newCliente = new Cliente(clienteDto.getNome(), clienteDto.getCpf(), clienteDto.getCelular(), clienteDto.getEmail(), endereco);
+		CreateEnderecoDto enderecoDto = clienteDto.getEndereco();
+
+		Endereco endereco = new Endereco();
+		
+		endereco.setBairro(enderecoDto.getBairro());
+		endereco.setCep(enderecoDto.getCep());
+		endereco.setComplemento(enderecoDto.getComplemento());
+		endereco.setEstado(enderecoDto.getEstado());
+		endereco.setLogradouro(enderecoDto.getLogradouro());
+		endereco.setMunicipio(enderecoDto.getMunicipio());
+		endereco.setNumero(enderecoDto.getNumero());
+
+		Cliente newCliente = new Cliente();
+
+		newCliente.setNome(clienteDto.getNome());
+		newCliente.setCpf(clienteDto.getCpf());
+		newCliente.setCelular(clienteDto.getCelular());
+		newCliente.setEmail(clienteDto.getEmail());
+		newCliente.setEndereco(endereco);
+
 		Cliente cliente = clienteRepository.findByCpf(newCliente.getCpf());
 		
 		if (cliente != null) {

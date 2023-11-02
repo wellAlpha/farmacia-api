@@ -16,8 +16,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Data;
 
-
+@Data
 @Entity
 @Where(clause = "ativo = true")
 @SQLDelete(sql = "UPDATE cargo SET ativo = false WHERE id=?;")
@@ -35,30 +36,4 @@ public class Cargo {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cargo", fetch = FetchType.LAZY, orphanRemoval = false)
 	private List<Funcionario> funcionarios = new ArrayList<>();
 	
-	public Cargo() {}
-
-	public Cargo(String nome) {
-		this.nome = nome;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
 }

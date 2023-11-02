@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.Data;
 
+@Data
 @Entity
 @Where(clause = "ativo = true")
 @SQLDelete(sql = "UPDATE cliente SET ativo = false WHERE id=?;")
@@ -38,86 +40,13 @@ public class Cliente {
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
-	
-	
-	public Cliente() {}
-
-
-	public Cliente(String nome, String cpf, String celular, String email, Endereco endereco) {
-		this.nome = nome;
-		this.cpf = cpf.replaceAll("[\\.\\-]", "");
-		this.celular = celular.replaceAll("[-()\\s]", "");
-		this.email = email;
-		this.endereco = endereco;
-	}
-
-
-	public String getNome() {
-		return nome;
-	}
-
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-
-	public String getCpf() {
-		return cpf;
-	}
-
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf.replaceAll("[\\.\\-]", "");
 	}
 
-
-	public String getCelular() {
-		return celular;
-	}
-
-
 	public void setCelular(String celular) {
 		this.celular = celular.replaceAll("[-()\\s]", "");
 	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-
-	public void setAtivo(Boolean ativo) {
-		this.ativo = ativo;
-	}
-
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-
-	public Integer getId() {
-		return id;
-	}
-
-	
-
-	
 
 }
