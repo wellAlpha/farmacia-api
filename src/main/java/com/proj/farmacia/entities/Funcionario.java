@@ -3,6 +3,9 @@ package com.proj.farmacia.entities;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,6 +51,8 @@ public class Funcionario {
 
     @ManyToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "cargo_id", referencedColumnName = "id", nullable = false)
+    // Para evitar futuros problemas com dependência circular.
+    @JsonProperty(access = Access.WRITE_ONLY)
     private Cargo cargo;
 	
     public void setCpf(String cpf) {
@@ -58,8 +63,12 @@ public class Funcionario {
         this.celular = celular.replaceAll("[-()\\s]", "");
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPasswordHash(String password) {
+        // Argon2PasswordEncoder encoder = Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+
+        // String passwordHash = encoder.encode(password);
+        
+        // this.passwordHash = passwordHash;
     }
     
 }

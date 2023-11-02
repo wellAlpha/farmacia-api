@@ -18,13 +18,17 @@ public class FuncionarioService {
         return funcionarioRepository.findByAtivoTrue();
     }
 
+    public Funcionario create(){
+        Funcionario funcionario = new Funcionario();
+        funcionario.setPasswordHash("Teste");
+        return funcionario;
+    }
     public void delete(Integer id){
         Optional<Funcionario> funcOp = funcionarioRepository.findById(id);
 		
 		if (funcOp.isEmpty()) {
-			throw new BadRequestException("Este cliente não está cadastrado.");
+			throw new BadRequestException("Este funcionário não está cadastrado.");
 		}
         funcionarioRepository.deleteById(id);
-        funcionarioRepository.save(null);
     }
 }

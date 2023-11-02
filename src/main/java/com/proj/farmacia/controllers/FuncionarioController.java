@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,12 +31,12 @@ public class FuncionarioController {
 				.body(funcionarioService.listAtivoTrue());
 	}
 	
-	// @PostMapping()
-	// public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDto clienteDto) throws Exception{
-	// 		return ResponseEntity
-	// 			.status(HttpStatus.CREATED)
-	// 			.body(clienteService.create(clienteDto));
-	// }
+	@PostMapping()
+	public ResponseEntity<Funcionario> create(/*@RequestBody @Valid CreateClienteDto clienteDto*/) throws Exception{
+			return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.body(funcionarioService.create());
+	}
 
 	// @PutMapping(path = "/{id}")
 	// public ResponseEntity<Cliente> update(@PathVariable @Positive Integer id, @RequestBody @Valid UpdateClienteDto clienteDto) throws Exception{

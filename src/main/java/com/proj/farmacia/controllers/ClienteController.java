@@ -36,6 +36,10 @@ public class ClienteController {
 				.body(clienteService.listAtivos());
 	}
 	
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Cliente> get(@PathVariable @Positive Integer id) throws Exception{
+			return ResponseEntity.ok().body(clienteService.get(id));
+	}
 	@PostMapping()
 	public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDto clienteDto) throws Exception{
 			return ResponseEntity

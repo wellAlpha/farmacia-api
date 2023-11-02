@@ -24,6 +24,18 @@ public class ClienteService {
 		return clientes;
 	}
 	
+	public Cliente get (Integer id) {
+		Optional<Cliente> clienteOp = clienteRepository.findById(id);
+
+		if (clienteOp.isEmpty()) {
+			throw new BadRequestException("Este cliente não está cadastrado.");
+		}
+
+		Cliente cliente = clienteOp.get();
+		
+		return cliente;
+	}
+
 	public Cliente create (CreateClienteDto clienteDto) throws Exception {
 		CreateEnderecoDto enderecoDto = clienteDto.getEndereco();
 
