@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proj.farmacia.dtos.categoria.cliente.CreateClienteDto;
-import com.proj.farmacia.dtos.categoria.cliente.UpdateClienteDto;
+import com.proj.farmacia.dtos.cliente.CreateClienteDTO;
+import com.proj.farmacia.dtos.cliente.UpdateClienteDTO;
 import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.services.ClienteService;
 
@@ -41,14 +41,14 @@ public class ClienteController {
 			return ResponseEntity.ok().body(clienteService.get(id));
 	}
 	@PostMapping()
-	public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDto clienteDto) throws Exception{
+	public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDTO clienteDto) throws Exception{
 			return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(clienteService.create(clienteDto));
 	}
 
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Cliente> update(@PathVariable @Positive Integer id, @RequestBody @Valid UpdateClienteDto clienteDto) throws Exception{
+	public ResponseEntity<Cliente> update(@PathVariable @Positive Integer id, @RequestBody @Valid UpdateClienteDTO clienteDto) throws Exception{
 			return ResponseEntity.ok().body(clienteService.update(id, clienteDto));
 	}
 
