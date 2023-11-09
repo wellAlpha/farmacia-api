@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.proj.farmacia.dtos.categoria.cliente.CreateClienteDto;
-import com.proj.farmacia.dtos.categoria.cliente.UpdateClienteDto;
-import com.proj.farmacia.dtos.categoria.endereco.CreateEnderecoDto;
+import com.proj.farmacia.dtos.cliente.CreateClienteDTO;
+import com.proj.farmacia.dtos.cliente.UpdateClienteDTO;
+import com.proj.farmacia.dtos.endereco.CreateEnderecoDTO;
 import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.entities.Endereco;
 import com.proj.farmacia.exceptions.BadRequestException;
@@ -36,8 +36,8 @@ public class ClienteService {
 		return cliente;
 	}
 
-	public Cliente create (CreateClienteDto clienteDto) throws Exception {
-		CreateEnderecoDto enderecoDto = clienteDto.getEndereco();
+	public Cliente create (CreateClienteDTO clienteDto) throws Exception {
+		CreateEnderecoDTO enderecoDto = clienteDto.getEndereco();
 
 		Endereco endereco = new Endereco();
 		
@@ -53,7 +53,7 @@ public class ClienteService {
 
 		newCliente.setNome(clienteDto.getNome());
 		newCliente.setCpf(clienteDto.getCpf());
-		newCliente.setCelular(clienteDto.getCelular());
+		newCliente.setTelefone(clienteDto.getTelefone());
 		newCliente.setEmail(clienteDto.getEmail());
 		newCliente.setEndereco(endereco);
 
@@ -67,7 +67,7 @@ public class ClienteService {
 		return clientes;
 	}
 	
-	public Cliente update (Integer id, UpdateClienteDto clienteDto) {
+	public Cliente update (Integer id, UpdateClienteDTO clienteDto) {
 		Optional<Cliente> clienteOp = clienteRepository.findById(id);
 		
 		if (clienteOp.isEmpty()) {
@@ -77,10 +77,7 @@ public class ClienteService {
 		
 		var enderecoDto = clienteDto.getEndereco();
 		
-		cliente.setNome(clienteDto.getNome());
-		cliente.setCpf(clienteDto.getCpf());
-		cliente.setCelular(clienteDto.getCelular());
-		cliente.setEmail(clienteDto.getEmail());
+		
 		var endereco = cliente.getEndereco();
 
 		endereco.setCep(enderecoDto.getCep());
@@ -90,6 +87,12 @@ public class ClienteService {
 		endereco.setMunicipio(enderecoDto.getMunicipio());
 		endereco.setLogradouro(enderecoDto.getLogradouro());
 		endereco.setNumero(enderecoDto.getNumero());
+
+		cliente.setNome(clienteDto.getNome());
+		cliente.setCpf(clienteDto.getCpf());
+		cliente.setTelefone(clienteDto.getTelefone());
+		cliente.setEmail(clienteDto.getEmail());
+		cliente.setEndereco(endereco);
 
 		Cliente clienteUpdated = clienteRepository.save(cliente);
 

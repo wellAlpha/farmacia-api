@@ -29,7 +29,7 @@ public class Cliente {
 	private String cpf;
 	
 	@Column(nullable = false, length = 11)
-	private String celular;
+	private String telefone;
 	
 	@Column(nullable = false, length = 30)
 	private String email;
@@ -45,8 +45,8 @@ public class Cliente {
 		this.cpf = cpf.replaceAll("[\\.\\-]", "");
 	}
 
-	public void setCelular(String celular) {
-		this.celular = celular.replaceAll("[-()\\s]", "");
+	public void setTelefone(String telefone) {
+		this.telefone = telefone.replaceAll("[-()\\s]", "");
 	}
 
 }

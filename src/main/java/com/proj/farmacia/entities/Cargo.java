@@ -2,11 +2,13 @@ package com.proj.farmacia.entities;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,6 +20,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @Entity
 @Where(clause = "ativo = true")
@@ -33,7 +36,7 @@ public class Cargo {
 	@Column(nullable = false)
 	private Boolean ativo = true;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cargo", fetch = FetchType.LAZY, orphanRemoval = false)
-	private List<Funcionario> funcionarios = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "cargo", fetch = FetchType.LAZY, orphanRemoval = false)
+	private Set<Funcionario> funcionarios = new HashSet<>();
 	
 }

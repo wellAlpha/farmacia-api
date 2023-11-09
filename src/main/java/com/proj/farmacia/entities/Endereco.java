@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.annotations.SQLDelete;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@SQLDelete(sql = "UPDATE endereco SET ativo = false WHERE id=?;")
 public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
