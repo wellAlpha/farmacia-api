@@ -14,6 +14,7 @@ import com.proj.farmacia.entities.Cargo;
 import com.proj.farmacia.entities.Endereco;
 import com.proj.farmacia.entities.Funcionario;
 import com.proj.farmacia.exceptions.BadRequestException;
+import com.proj.farmacia.exceptions.NotFoundException;
 import com.proj.farmacia.repositories.FuncionarioRepository;
 
 @Service
@@ -28,7 +29,7 @@ public class FuncionarioService {
 		Optional<Funcionario> funcionarioOp = funcionarioRepository.findById(id);
 
 		if (funcionarioOp.isEmpty()) {
-			throw new BadRequestException("Este funcionário não está cadastrado.");
+			throw new NotFoundException("Este funcionário não está cadastrado.");
 		}
 
 		Funcionario cliente = funcionarioOp.get();
@@ -36,7 +37,7 @@ public class FuncionarioService {
 		return cliente;
 	}
 
-	public Funcionario create (CreateFuncionarioDTO funcionarioDto) throws Exception {
+	public Funcionario create (CreateFuncionarioDTO funcionarioDto) {
 		CreateEnderecoDTO enderecoDto = funcionarioDto.getEndereco();
         CreateCargoDTO cargoDto = funcionarioDto.getCargo();
 
@@ -76,7 +77,7 @@ public class FuncionarioService {
 		Optional<Funcionario> funcionarioOp = funcionarioRepository.findById(id);
 		
 		if (funcionarioOp.isEmpty()) {
-			throw new BadRequestException("Este funcionário não está cadastrado.");
+			throw new NotFoundException("Este funcionário não está cadastrado.");
 		}
 		Funcionario funcionario = funcionarioOp.get();
         CreateCargoDTO cargoDto = funcionarioDto.getCargo();
@@ -112,7 +113,7 @@ public class FuncionarioService {
         Optional<Funcionario> funcOp = funcionarioRepository.findById(id);
 		
 		if (funcOp.isEmpty()) {
-			throw new BadRequestException("Este funcionário não está cadastrado.");
+			throw new NotFoundException("Este funcionário não está cadastrado.");
 		}
         funcionarioRepository.deleteById(id);
     }
