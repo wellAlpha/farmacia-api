@@ -2,16 +2,18 @@ package com.proj.farmacia.dtos.fornecedor;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.proj.farmacia.entities.Endereco;
+import com.proj.farmacia.dtos.endereco.CreateEnderecoDTO;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public class CreateFornecedor {
+
+@Data
+@AllArgsConstructor
+public class CreateFornecedorDTO {
     
     @NotBlank(message = "nome {notblank}")
 	@NotNull(message = "nome {notnull}")
@@ -23,9 +25,7 @@ public class CreateFornecedor {
 	@Length(max = 30, message = "cnpj {len}") 
 	private String cnpj;
 
-    
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
-    private Endereco endereco;
+    @Valid
+    private CreateEnderecoDTO endereco;
     
 }
