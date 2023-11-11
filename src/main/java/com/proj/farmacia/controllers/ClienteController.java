@@ -30,7 +30,7 @@ public class ClienteController {
 @Autowired ClienteService clienteService;
 	
 	@GetMapping()
-	public ResponseEntity<List<Cliente>> listClientes (){
+	public ResponseEntity<List<Cliente>> listClientes () throws Exception {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(clienteService.listAtivos());

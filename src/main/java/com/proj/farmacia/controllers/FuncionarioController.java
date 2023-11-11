@@ -30,7 +30,7 @@ public class FuncionarioController {
 @Autowired FuncionarioService funcionarioService;
 	
 	@GetMapping()
-	public ResponseEntity<List<Funcionario>> listClientes (){
+	public ResponseEntity<List<Funcionario>> listClientes () throws Exception {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(funcionarioService.listAtivoTrue());

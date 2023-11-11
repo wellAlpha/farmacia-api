@@ -12,6 +12,7 @@ import com.proj.farmacia.dtos.endereco.CreateEnderecoDTO;
 import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.entities.Endereco;
 import com.proj.farmacia.exceptions.BadRequestException;
+import com.proj.farmacia.exceptions.NotFoundException;
 import com.proj.farmacia.repositories.ClienteRepository;
 
 @Service
@@ -28,7 +29,7 @@ public class ClienteService {
 		Optional<Cliente> clienteOp = clienteRepository.findById(id);
 
 		if (clienteOp.isEmpty()) {
-			throw new BadRequestException("Este cliente não está cadastrado.");
+			throw new NotFoundException("Este cliente não está cadastrado.");
 		}
 
 		Cliente cliente = clienteOp.get();
@@ -36,7 +37,7 @@ public class ClienteService {
 		return cliente;
 	}
 
-	public Cliente create (CreateClienteDTO clienteDto) throws Exception {
+	public Cliente create (CreateClienteDTO clienteDto) {
 		CreateEnderecoDTO enderecoDto = clienteDto.getEndereco();
 
 		Endereco endereco = new Endereco();
@@ -71,7 +72,7 @@ public class ClienteService {
 		Optional<Cliente> clienteOp = clienteRepository.findById(id);
 		
 		if (clienteOp.isEmpty()) {
-			throw new BadRequestException("Este cliente não está cadastrado.");
+			throw new NotFoundException("Este cliente não está cadastrado.");
 		}
 		Cliente cliente = clienteOp.get();
 		
@@ -103,7 +104,7 @@ public class ClienteService {
 		Optional<Cliente> clienteOp = clienteRepository.findById(id);
 		
 		if (clienteOp.isEmpty()) {
-			throw new BadRequestException("Este cliente não está cadastrado.");
+			throw new NotFoundException("Este cliente não está cadastrado.");
 		}
 		Cliente cliente = clienteOp.get();
 		

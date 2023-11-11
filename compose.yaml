@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   mysqldb:
-    image: 'mysql:latest'
+    image: 'mysql:8.2'
     env_file:
       - .env
     ports:
@@ -28,7 +28,7 @@ volumes:
 networks:
   default:
   banco:
-    #internal: true
+    internal: true
 
 
   
