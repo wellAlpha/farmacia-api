@@ -33,9 +33,9 @@ public class ClienteService {
 		}
 
 		Cliente cliente = clienteOp.get();
-		
 		return cliente;
-	}
+	}	
+	
 
 	public Cliente create (CreateClienteDTO clienteDto) {
 		CreateEnderecoDTO enderecoDto = clienteDto.getEndereco();

@@ -7,4 +7,5 @@ import com.proj.farmacia.entities.Fornecedor;
 
 public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>{
 	List<Fornecedor> findByAtivoTrue();
+	Fornecedor findByCnpj(String cnpj);
 }

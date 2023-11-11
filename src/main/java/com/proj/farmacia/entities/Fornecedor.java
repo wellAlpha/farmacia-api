@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Where(clause = "ativo = true")
-@SQLDelete(sql = "UPDATE cargo SET ativo = false WHERE id=?;")
+@SQLDelete(sql = "UPDATE fornecedor SET ativo = false WHERE id=?;")
 public class Fornecedor {
     
 	@Id
@@ -37,8 +37,5 @@ public class Fornecedor {
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
-
-
-	//@OneToMany(cascade = CascadeType.DETACH, mappedBy = "cargo", fetch = FetchType.LAZY, orphanRemoval = false)
-	//private Set<Funcionario> funcionarios = new HashSet<>();
+		
 }
