@@ -49,3 +49,25 @@ INSERT INTO composicao (descricao) VALUES
 ('Ondansetrona'),
 ('Cetirizina'),
 ('Guaifenesina');
+
+INSERT INTO categoria_produto (descricao) VALUES 
+('Cosmético'),
+('Produtos de Higiene Pessoal'),
+('Suplemento Vitamínico'),
+('Alimentos Saudáveis'),
+('Produtos para Cuidado Capilar'),
+('Acessórios de Higiene Bucal'),
+('Dispositivos Médicos'),
+('Cuidado com a Pele'),
+('Produtos para Bebês e Crianças'),
+('Artigos para Cuidado Feminino'),
+('Equipamentos de Primeiros Socorros'),
+('Produtos de Bem-Estar'),
+('Artigos de Conveniência'),
+('Produtos para Diabéticos'),
+('Ortopédicos'),
+('Produtos para Cuidado Ocular'),
+('Artigos para Cuidado com os Pés'),
+('Produtos para Saúde Sexual'),
+('Testes de Gravidez e Ovulação'),
+('Outros');
