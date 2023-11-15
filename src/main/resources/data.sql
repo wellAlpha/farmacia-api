@@ -1,10 +1,10 @@
-#Inserindo os tipos de cargo
-INSERT INTO cargo (nome) VALUES 
-("Administrador"),
-("Farmacêutico"),
-("Vendedor");
 
-#Inserindo os tipos de medicação
+INSERT INTO cargo (nome) VALUES 
+('Administrador'),
+('Farmacêutico'),
+('Vendedor');
+
+
 INSERT INTO tipo_medicacao (descricao) VALUES 
 ('Analgésico'),
 ('Antibiótico'),
@@ -21,4 +21,31 @@ INSERT INTO tipo_medicacao (descricao) VALUES
 ('Quimioterápico'),
 ('Anti-histamínico'),
 ('Broncodilatador'),
+('Antiácido'),
+('Antifúngico'),
+('Antiemético'),
+('Anti-histamínico'),
+('Expectorante'),
 ('Outros');
+
+INSERT INTO composicao (descricao) VALUES 
+('Paracetamol'),
+('Amoxicilina'),
+('Oseltamivir'),
+('Ibuprofeno'),
+('Fluoxetina'),
+('Risperidona'),
+('Valproato de Sódio'),
+('Paracetamol'),
+('Losartan'),
+('Varfarina'),
+('Insulina'),
+('Ciclosporina'),
+('Metotrexato'),
+('Loratadina'),
+('Albuterol'),
+('Omeprazol'),
+('Clotrimazol'),
+('Ondansetrona'),
+('Cetirizina'),
+('Guaifenesina');

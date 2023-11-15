@@ -14,8 +14,8 @@ import lombok.Data;
 @Data
 @Entity
 @Where(clause = "ativo = true")
-@SQLDelete(sql = "UPDATE tipo_medicacao SET ativo = false WHERE id=?;")
-public class TipoMedicacao {
+@SQLDelete(sql = "UPDATE composicao SET ativo = false WHERE id=?;")
+public class Composicao {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -24,6 +24,6 @@ public class TipoMedicacao {
 	private String descricao;
 
 	@Column(nullable = false)
-    @ColumnDefault("true")
+	@ColumnDefault("true")
 	private Boolean ativo = true;
 }
