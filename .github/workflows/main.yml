@@ -13,8 +13,12 @@ jobs:
       GCR_HOST: "gcr.io"
       GCR_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
       GCR_IMAGE: "farmacia-api"
-
+      GCR_REGION: "southamerica-east1-a"
+      CLOUD_RUN_SERVICE_NAME: "app"
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
       - name: Set up Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v0.6.0
         with:
@@ -25,3 +29,10 @@ jobs:
         run: |
           docker build -t $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA .
           docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
+      
+      - name: Deploy to Cloud Run
+        run: |
+            gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
+              --image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA \
+              --platform=managed \
+              --region=$GCR_REGION
