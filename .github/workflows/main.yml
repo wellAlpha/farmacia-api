@@ -1,0 +1,27 @@
+name: Build and Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      GCR_HOST: "gcr.io"
+      GCR_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
+      GCR_IMAGE: "farmacia-api"
+
+    steps:
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v0.6.0
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA .
+          docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
