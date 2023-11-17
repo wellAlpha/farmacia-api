@@ -24,4 +24,7 @@ USER user
 
 ENV JAVA_OPTS="-Xmx256m -Xms128m"
 
+ENV PORT $PORT
+EXPOSE $PORT
+
 ENTRYPOINT [ "java", "-jar", "farmacia-0.0.1.jar" ]
