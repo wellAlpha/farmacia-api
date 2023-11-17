@@ -25,6 +25,10 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
+      - name: Configure Docker Credential Helper
+        run: |
+            gcloud auth configure-docker
+
       - name: Build and Push Docker Image
         env:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
