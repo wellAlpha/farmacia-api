@@ -18,4 +18,4 @@ spring:
     show-sql: true # Ative para mostrar as consultas SQL no console (útil para depuração)
     defer-datasource-initialization: true # Inicializando dataSource depois da inserção
 server:
-  port: ${PORT:8080}
+  port: ${$PORT:8080}
