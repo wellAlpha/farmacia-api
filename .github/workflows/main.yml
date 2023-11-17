@@ -10,11 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GCR_HOST: "gcr.io"
       GCR_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
-      GCR_IMAGE: "farmacia-api"
-      GCR_REGION: "southamerica-east1"
-      CLOUD_RUN_SERVICE_NAME: "app"
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -24,6 +21,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
       - name: Configure Docker Credential Helper
         run: |
             gcloud auth configure-docker
