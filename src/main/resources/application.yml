@@ -1,0 +1,21 @@
+spring:
+  docker:
+    compose:
+      enabled: false #desabilite ao usar para gerar imagens
+  datasource:
+    url: jdbc:mysql://mysqldb:3306/mydatabase
+    username: myuser
+    password: secret
+    hikari:
+      maximum-pool-size: 10 # Ajuste o tamanho máximo do pool conforme necessário
+  sql:
+   init:
+     mode: always #always || embedded || never
+
+  jpa:
+    hibernate:
+      ddl-auto: create # Defina a estratégia de criação/atualização das tabelas (pode ser 'create', 'update', etc.)            
+    show-sql: true # Ative para mostrar as consultas SQL no console (útil para depuração)
+    defer-datasource-initialization: true # Inicializando dataSource depois da inserção
+server:
+  port: ${PORT:8080}
