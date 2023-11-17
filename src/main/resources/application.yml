@@ -3,9 +3,9 @@ spring:
     compose:
       enabled: false #desabilite ao usar para gerar imagens
   datasource:
-    url: jdbc:mysql://mysqldb:3306/mydatabase
-    username: myuser
-    password: secret
+    url: jdbc:mysql://${DB_HOST:mysqldb}:${DB_PORT:3306}/${DB_NAME:mydatabase}
+    username: ${DB_USERNAME:myuser}
+    password: ${DB_PASSWORD:secret}
     hikari:
       maximum-pool-size: 10 # Ajuste o tamanho máximo do pool conforme necessário
   sql:

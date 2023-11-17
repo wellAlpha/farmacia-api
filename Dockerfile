@@ -24,7 +24,7 @@ USER user
 
 ENV JAVA_OPTS="-Xmx256m -Xms128m"
 
-ENV PORT 8080
-EXPOSE 8080
+#ENV PORT 8080
+#EXPOSE 8080
 
 ENTRYPOINT [ "java", "-jar", "farmacia-0.0.1.jar" ]
