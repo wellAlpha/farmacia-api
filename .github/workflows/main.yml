@@ -24,7 +24,6 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-
       - name: Configure Docker Credential Helper
         run: |
             gcloud auth configure-docker
