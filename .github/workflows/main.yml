@@ -29,8 +29,6 @@ jobs:
             gcloud auth configure-docker
 
       - name: Build and Push Docker Image
-        env:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
         run: |
           docker build -t $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA .
           docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
