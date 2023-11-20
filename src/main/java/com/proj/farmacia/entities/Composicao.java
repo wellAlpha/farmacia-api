@@ -4,40 +4,26 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
-
 
 @Data
 @Entity
 @Where(clause = "ativo = true")
-@SQLDelete(sql = "UPDATE fornecedor SET ativo = false WHERE id=?;")
-public class Fornecedor {
-    
-	@Id
+@SQLDelete(sql = "UPDATE composicao SET ativo = false WHERE id=?;")
+public class Composicao {
+    @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Column(nullable = false, length = 100)
-	private String nome;
+	private String descricao;
 
 	@Column(nullable = false)
 	@ColumnDefault("true")
 	private Boolean ativo = true;
-
-    @Column(nullable = false, length = 30)
-	private String cnpj;
-
-    
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
-    private Endereco endereco;
-		
 }
