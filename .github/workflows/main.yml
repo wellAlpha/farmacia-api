@@ -39,8 +39,8 @@ jobs:
       - name: Deploy to Cloud Run
         uses: 'google-github-actions/deploy-cloudrun@v1'
         with:
-          service: $CLOUD_RUN_SERVICE_NAME
-          image: $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
+          service: '$CLOUD_RUN_SERVICE_NAME'
+          image: '$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA'
         # run: |
         #     gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
         #       --image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA \
