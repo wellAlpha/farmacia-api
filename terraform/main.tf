@@ -1,40 +1,53 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "4.51.0"
-    }
-  }
-}
-
 provider "google" {
-  credentials = file("./total-progress-398820-7c4dfa1901c7.json")
-
-  project = "total-progress-398820"
-  region  = "us-central1"
-  zone    = "us-central1-c"
+  credentials = file("/home/well/terraform/tutorial-gcloud/total-progress-398820-7c4dfa1901c7.json")
+  project     = var.project
+  region      = var.region
 }
 
-
-resource "google_compute_network" "vpc_network" {
-  name = "terraform-network"
-}
-
-resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
-  machine_type = "f1-micro"
-  tags         = ["web", "dev"]
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-    }
-  }
-
-  network_interface {
-    network = google_compute_network.vpc_network.name
-    access_config {
-    }
+resource "google_sql_database_instance" "farmacia" {
+  name             = "farmacia"
+  database_version = "MYSQL_8_2"
+  project          = var.project
+  region           = var.region
+  settings {
+    tier = "db-f1-micro"
   }
 }
 
+resource "google_sql_user" "user" {
+  name     = var.database_user
+  password = var.database_user_password
+  instance = google_sql_database_instance.farmacia.name
+}
+
+resource "google_cloud_run_service" "app" {
+  name     = var.service_name
+  location = var.region
+  template {
+    spec {
+      containers {
+        image = var.image
+        env {
+          name = "DB_HOST"
+          value = "${google_sql_database_instance.farmacia.ip_address}"
+        }
+        env {
+          name = "DB_PORT"
+          value = "${google_sql_database_instance.farmacia.port}"
+        }
+        env {
+          name = "DB_NAME"
+          value = "${google_sql_database_instance.farmacia.database}"
+        }
+        env {
+          name  = "DB_USERNAME"
+          value = google_sql_user.user.name
+        }
+        env {
+          name  = "DB_PASSWORD"
+          value = google_sql_user.user.password
+        }
+      }
+    }
+  }
+}

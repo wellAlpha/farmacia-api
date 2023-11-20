@@ -35,7 +35,17 @@ jobs:
           docker build -t $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA .
           docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
         
-        
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve
+
       # - name: Deploy to Cloud Run
       #   run: |
       #       gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
