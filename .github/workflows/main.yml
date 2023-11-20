@@ -18,7 +18,7 @@ jobs:
       CLOUD_RUN_SERVICE_NAME: "app"
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - id: 'auth'
         name: 'Authenticate to Google Cloud'
@@ -37,8 +37,12 @@ jobs:
         
         
       - name: Deploy to Cloud Run
-        run: |
-            gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
-              --image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA \
-              --platform=managed \
-              --region=$GCR_REGION
+        uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          service: $CLOUD_RUN_SERVICE_NAME
+          image: $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
+        # run: |
+        #     gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
+        #       --image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA \
+        #       --platform=managed \
+        #       --region=$GCR_REGION
