@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      GCR_HOST: "gcr.io"
+      GCR_HOST: ${{ secrets.GCR_HOST }}
       GCR_PROJECT: ${{ secrets.GCP_PROJECT_ID }}
-      GCR_IMAGE: "farmacia-api"
-      GCR_REGION: "southamerica-east1"
-      CLOUD_RUN_SERVICE_NAME: "app"
+      GCR_IMAGE: ${{ secrets.GCR_IMAGE }}
+      GCR_REGION: ${{ secrets.GCR_REGION }}
+      CLOUD_RUN_SERVICE_NAME: ${{ secrets.CLOUD_RUN_SERVICE_NAME }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -36,9 +36,9 @@ jobs:
           docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
         
         
-      - name: Deploy to Cloud Run
-        run: |
-            gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
-              --image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA \
-              --platform=managed \
-              --region=$GCR_REGION
+      # - name: Deploy to Cloud Run
+      #   run: |
+      #       gcloud run deploy $CLOUD_RUN_SERVICE_NAME \
+      #         --image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA \
+      #         --platform=managed \
+      #         --region=$GCR_REGION
