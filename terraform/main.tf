@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("/home/well/terraform/tutorial-gcloud/total-progress-398820-7c4dfa1901c7.json")
+  credentials = file(var.credentials_file)
   project     = var.project
   region      = var.region
 }
