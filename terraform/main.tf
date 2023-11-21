@@ -28,16 +28,16 @@ resource "google_cloud_run_service" "app" {
       containers {
         image = var.image
         env {
-          name = "DB_HOST"
-          value = "${google_sql_database_instance.farmacia.ip_address}"
+          name  = "DB_HOST"
+          value = google_sql_database_instance.farmacia.ip_address
         }
         env {
-          name = "DB_PORT"
-          value = "${google_sql_database_instance.farmacia.port}"
+          name  = "DB_PORT"
+          value = google_sql_database_instance.farmacia.port
         }
         env {
-          name = "DB_NAME"
-          value = "${google_sql_database_instance.farmacia.database}"
+          name  = "DB_NAME"
+          value = google_sql_database_instance.farmacia.database
         }
         env {
           name  = "DB_USERNAME"
