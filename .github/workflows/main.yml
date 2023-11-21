@@ -47,13 +47,13 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./terraform
-        run: terraform apply -auto-approve \
-          -var="credentials_file=$GCP_CREDENTIALS" \
-          -var="project=$GCR_PROJECT" \
-          -var="region=$GCR_REGION" \
-          -var="database_user=$DATABASE_USER" \
-          -var="database_user_password=$DATABASE_USER_PASSWORD" \
-          -var="service_name=$CLOUD_RUN_SERVICE_NAME" \
+        run: terraform apply -auto-approve 
+          -var="credentials_file=$GCP_CREDENTIALS" 
+          -var="project=$GCR_PROJECT" 
+          -var="region=$GCR_REGION" 
+          -var="database_user=$DATABASE_USER" 
+          -var="database_user_password=$DATABASE_USER_PASSWORD" 
+          -var="service_name=$CLOUD_RUN_SERVICE_NAME" 
           -var="image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA"
 
       # - name: Deploy to Cloud Run
