@@ -17,3 +17,7 @@ output "database_user_name" {
 output "database_user_password" {
   value = google_sql_user.user.password
 }
+
+output "cloud_run_url" {
+  value = google_cloud_run_service.app.status[0].url
+}
