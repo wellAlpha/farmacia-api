@@ -6,7 +6,7 @@ provider "google" {
 
 resource "google_sql_database_instance" "farmacia" {
   name             = "farmacia"
-  database_version = "MYSQL_8_2"
+  database_version = "MYSQL_8_0"
   project          = var.project
   region           = var.region
   settings {
