@@ -33,7 +33,7 @@ resource "google_cloud_run_service" "app" {
         }
         env {
           name  = "DB_PORT"
-          value = google_sql_database_instance.farmacia.port
+          value = 3306
         }
         env {
           name  = "DB_NAME"
