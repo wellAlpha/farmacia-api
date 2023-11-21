@@ -44,7 +44,8 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./terraform
-        run: terraform apply -auto-approve
+        run: >
+          terraform apply -auto-approve
           -var="credentials_file=${{ secrets.GCP_CREDENTIALS }}" \
           -var="project=${{ env.GCR_PROJECT }}" \
           -var="region=${{ env.GCR_REGION }}" \
