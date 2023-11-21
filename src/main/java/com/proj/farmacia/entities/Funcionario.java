@@ -1,5 +1,6 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -40,6 +41,7 @@ public class Funcionario {
 	private String email;
 
 	@Column(nullable = false)
+	@ColumnDefault("true")
 	private Boolean ativo = true;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })

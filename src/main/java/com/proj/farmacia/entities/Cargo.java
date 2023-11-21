@@ -5,6 +5,7 @@ package com.proj.farmacia.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -34,6 +35,7 @@ public class Cargo {
 	private String nome;
 
 	@Column(nullable = false)
+	@ColumnDefault("true")
 	private Boolean ativo = true;
 
 	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "cargo", fetch = FetchType.LAZY, orphanRemoval = false)

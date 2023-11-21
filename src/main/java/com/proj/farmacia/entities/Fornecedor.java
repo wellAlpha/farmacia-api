@@ -1,5 +1,6 @@
 package com.proj.farmacia.entities;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -28,6 +29,7 @@ public class Fornecedor {
 	private String nome;
 
 	@Column(nullable = false)
+	@ColumnDefault("true")
 	private Boolean ativo = true;
 
     @Column(nullable = false, length = 30)
