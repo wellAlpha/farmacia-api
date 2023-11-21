@@ -11,10 +11,6 @@ variable "region" {
   description = "região"
 }
 
-variable "database_name" {
-  description = "nome do banco de dados"
-}
-
 variable "database_user" {
   description = "usuário"
 }
