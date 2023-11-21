@@ -19,6 +19,7 @@ jobs:
       DATABASE_USER: ${{ secrets.DATABASE_USER }}
       DATABASE_USER_PASSWORD: ${{ secrets.DATABASE_USER_PASSWORD }}
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -52,6 +53,7 @@ jobs:
           -var="project=$GCR_PROJECT" 
           -var="region=$GCR_REGION" 
           -var="database_user=$DATABASE_USER" 
+          -var="database_port=$DATABASE_PORT" 
           -var="database_user_password=$DATABASE_USER_PASSWORD" 
           -var="service_name=$CLOUD_RUN_SERVICE_NAME" 
           -var="image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA"

@@ -6,18 +6,18 @@ output "database_instance_port" {
   value = google_sql_database_instance.farmacia.port
 }
 
-output "database_name" {
-  value = google_sql_database_instance.farmacia.database
-}
+# output "database_name" {
+#   value = google_sql_database_instance.farmacia.database
+# }
 
-output "database_user_name" {
-  value = google_sql_user.user.name
-}
+# output "database_user_name" {
+#   value = google_sql_user.user.name
+# }
 
-output "database_user_password" {
-  value = google_sql_user.user.password
-}
+# output "database_user_password" {
+#   value = google_sql_user.user.password
+# }
 
-output "cloud_run_url" {
-  value = google_cloud_run_service.app.status[0].url
-}
+# output "cloud_run_url" {
+#   value = google_cloud_run_service.app.status[0].url
+# }

@@ -37,15 +37,15 @@ resource "google_cloud_run_service" "app" {
         }
         env {
           name  = "DB_NAME"
-          value = google_sql_database_instance.farmacia.database
+          value = "farmacia"
         }
         env {
           name  = "DB_USERNAME"
-          value = google_sql_user.user.name
+          value = var.database_user
         }
         env {
           name  = "DB_PASSWORD"
-          value = google_sql_user.user.password
+          value = var.database_user_password
         }
       }
     }

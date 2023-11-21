@@ -11,6 +11,10 @@ variable "region" {
   description = "região"
 }
 
+variable "database_port" {
+  description = "porta do banco"
+}
+
 variable "database_user" {
   description = "usuário"
 }
@@ -26,3 +30,4 @@ variable "service_name" {
 variable "image" {
   description = "nome da imagem"
 }
+
