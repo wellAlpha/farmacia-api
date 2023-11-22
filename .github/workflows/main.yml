@@ -2,12 +2,11 @@ name: Build and Deploy
 
 on:
   pull_request:
-    branches:
-      - main
-
+    types:
+      - closed
 jobs:
   build:
-    #if: github.event.review.state == 'approved'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
 
     env:
