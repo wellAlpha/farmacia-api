@@ -39,7 +39,7 @@ jobs:
           docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
         
       # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v1
+      #   uses: hashicorp/setup-terraform@v2
       
       # - name: Terraform Init
       #   working-directory: ./terraform
