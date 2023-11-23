@@ -20,7 +20,7 @@ public class Composicao {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(nullable = false, length = 100)
+	@Column(nullable = false, length = 100, unique = true)
 	private String descricao;
 
 	@Column(nullable = false)
