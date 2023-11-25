@@ -1,7 +1,7 @@
 spring:
   docker:
     compose:
-      enabled: false #desabilite ao usar para gerar imagens
+      enabled: true #desabilite ao usar para gerar imagens
   datasource:
     url: jdbc:mysql://${DB_HOST:mysqldb}:${DB_PORT:3306}/${DB_NAME:mydatabase}
     username: ${DB_USERNAME:myuser}

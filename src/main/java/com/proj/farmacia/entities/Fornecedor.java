@@ -39,5 +39,7 @@ public class Fornecedor {
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
-		
+	
+	@OneToOne(cascade = CascadeType.DETACH)
+    private Medicacao medicacao;
 }
