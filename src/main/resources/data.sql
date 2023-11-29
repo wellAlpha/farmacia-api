@@ -84,3 +84,11 @@ VALUES
   ('Drágeas', 'DRG'),
   ('Gotas', 'GT'),
   ('Unidades', 'UN');
+
+INSERT IGNORE INTO forma_pagamento (descricao)
+VALUES 
+  ('Cartão de Crédito'),
+  ('Cartão de Débito'),
+  ('Pix'),
+  ('Dinheiro');
+  

@@ -15,6 +15,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateClienteDTO {
+	private Integer id;
+
 	@NotBlank(message = "nome {notblank}")
 	@NotNull(message = "nome {notnull}")
 	@Length(max = 150, message = "nome {len}")
