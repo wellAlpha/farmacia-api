@@ -5,6 +5,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.proj.farmacia.entities.Compra;
 
-public interface CompraRepository extends JpaRepository<Compra, Integer>{
-	List<Compra> findByAtivoTrue();
-}
+public interface CompraRepository extends JpaRepository<Compra, Integer>{}
