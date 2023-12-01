@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import java.util.List;
+
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -12,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -28,6 +32,9 @@ public class Medicacao {
     @Column(columnDefinition = "INT UNSIGNED NOT NULL")
     private Integer conteudo;
 
+	@Column(nullable = false)
+	private String nome; 
+
     @Column(nullable = false)
 	@ColumnDefault("true")
 	private Boolean ativo = true;
@@ -43,4 +50,13 @@ public class Medicacao {
 	@OneToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
     private Fornecedor fornecedor;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "medicacao_composicao",
+        joinColumns = @JoinColumn(name = "medicacao_id"),
+        inverseJoinColumns = @JoinColumn(name = "composicao_id"))
+	private List<Composicao> medicacao;	
+
+	
 }
