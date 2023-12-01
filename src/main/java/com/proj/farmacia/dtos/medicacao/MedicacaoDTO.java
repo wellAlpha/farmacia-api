@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MedicacaoDTO {
 
-    @Positive
-    @NotNull
+	@NotNull(message = "id {notnull}")
+    @Positive(message = "id {positive}")
 	private Integer id;
 
 }

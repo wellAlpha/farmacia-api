@@ -1,13 +1,10 @@
 package com.proj.farmacia.entities;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -17,8 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -29,7 +26,7 @@ public class Compra {
 	private Integer id;
 
 	@Column(nullable = false)
-	private BigDecimal precoTotal;
+	private Double precoTotal;
 
 	@Column(nullable = false)
 	private Integer parcelas = 1;
@@ -38,20 +35,20 @@ public class Compra {
 	private LocalDateTime dataCompra = LocalDateTime.now();
 
 
-	@OneToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "forma_pagamento_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "forma_pagamento_id", referencedColumnName = "id", nullable = false)
     private FormaPagamento formaPagamento;
 
-	@OneToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "funcionario_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "funcionario_id", referencedColumnName = "id", nullable = false)
     private Funcionario funcionario;
 
-	@OneToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "cliente_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
     private Cliente cliente;
 
-	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "compra", fetch = FetchType.EAGER, orphanRemoval = false)
-	Set<ItemCompra> itensCompra =  new HashSet<>();
+	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER, mappedBy = "compra", orphanRemoval = false)
+	Set<ItemCompra> itens = new HashSet();
 
 	public void setParcelas (Integer parcelas) {
 		if (parcelas != null && parcelas > 1) {

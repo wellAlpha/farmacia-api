@@ -24,14 +24,14 @@ import jakarta.validation.Valid;
 public class CompraController {
     @Autowired  CompraService compraService;
     @GetMapping()
-	public ResponseEntity<List<Compra>> listCompras (){
+	public ResponseEntity<List<Compra>> listCompras () throws Exception {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(compraService.list());
 	}
 
 	@PostMapping()
-	public ResponseEntity<Compra> create (@RequestBody @Valid CompraDTO compraDTO) {
+	public ResponseEntity<Compra> create (@RequestBody @Valid CompraDTO compraDTO) throws Exception  {
 		return ResponseEntity
 		.status(HttpStatus.CREATED)
 		.body(compraService.store(compraDTO));

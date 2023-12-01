@@ -1,6 +1,5 @@
 package com.proj.farmacia.dtos.compra;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.proj.farmacia.dtos.cliente.ClienteDTO;
@@ -10,6 +9,7 @@ import com.proj.farmacia.dtos.itemCompra.ItemCompraDTO;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,20 +20,26 @@ import lombok.NoArgsConstructor;
 public class CompraDTO {
     private int parcelas;
     @Valid
+    @NotNull(message = "cliente {notnull}")
     private ClienteDTO cliente;
     @Valid
+    @NotNull(message = "formaPagamento {notnull}")
     private FormaPagamentoDTO formaPagamento;
     @Valid
+    @NotNull(message = "funcionario {notnull}")
     private FuncionarioDTO funcionario;
 
-    
+    @Valid
+    @NotNull(message = "itensCompra {notnull}")
     @NotEmpty(message = "itensCompra {notempty}")
-    private List<@Valid ItemCompraDTO> itensCompra;
+    private List<ItemCompraDTO> itensCompra;
 
-    public BigDecimal getTotal() {
-        BigDecimal total =  BigDecimal.ZERO;
+    public Double getTotal() {
+        Double total =  Double.MIN_NORMAL;
         for (ItemCompraDTO itemCompraDTO : itensCompra) {
-            total.add(itemCompraDTO.getPrecoUnitario());
+            if(itemCompraDTO.getPrecoUnitario() != null) {
+                total += itemCompraDTO.getPrecoUnitario();
+            }
         }
         return total;
     }

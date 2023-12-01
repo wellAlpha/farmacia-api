@@ -1,10 +1,5 @@
 package com.proj.farmacia.entities;
 
-import java.math.BigDecimal;
-
-import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,19 +20,17 @@ public class ItemCompra {
     private Integer id;
 
     @Column(nullable = false)
-	private BigDecimal precoUnitario;
+	private Double precoUnitario;
 
     @Column(nullable = false)
 	private Integer quantidade = 1;
 
-    // @OneToOne(cascade = CascadeType.DETACH)
-	// @JoinColumn(name = "compra_id", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "compra_id", referencedColumnName = "id", nullable = false)
     private Compra compra;
 
-    @OneToOne(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "medicacao_id", referencedColumnName = "id", nullable = true)
+    @ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "medicacao_id", referencedColumnName = "id", nullable = false)
     private Medicacao medicacao;
 
     

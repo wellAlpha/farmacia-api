@@ -20,14 +20,16 @@ import com.proj.farmacia.mappers.FormaPagamentoMapper;
 import com.proj.farmacia.mappers.FuncionarioMapper;
 import com.proj.farmacia.mappers.ItemCompraMapper;
 import com.proj.farmacia.repositories.CompraRepository;
+import com.proj.farmacia.repositories.ItemCompraRepository;
 
 @Service
 public class CompraService {
 	@Autowired CompraRepository compraRepository;
+	@Autowired ItemCompraRepository itemCompraRepository;
 
 	public List<Compra> list () {
-		List<Compra> compras = compraRepository.findAll();
-
+		var compras = compraRepository.findAll();
+		
 		return compras;
 	}
 
@@ -36,22 +38,23 @@ public class CompraService {
 		FormaPagamento formaPagamento = FormaPagamentoMapper.INSTANCE.formaPagamentoDtoToFormaPagamento(compraDTO.getFormaPagamento());
 		Funcionario funcionario = FuncionarioMapper.INSTANCE.funcionarioDtoToFuncionario(compraDTO.getFuncionario());
 
-		Set<ItemCompra> itensCompra = new HashSet<>();
-
-		for (ItemCompraDTO itemCompraDto : compraDTO.getItensCompra()) {
-			ItemCompra itemCompra = ItemCompraMapper.INSTANCE.ItemCompraDtoToItemCompra(itemCompraDto);
-			itensCompra.add(itemCompra);
-		}
-
 		Compra compra = new Compra();
 		compra.setCliente(cliente);
 		compra.setFormaPagamento(formaPagamento);
 		compra.setFuncionario(funcionario);
 		compra.setParcelas(compraDTO.getParcelas());
 		compra.setPrecoTotal(compraDTO.getTotal());
-		compra.setItensCompra(itensCompra);
-		
-		return compraRepository.save(compra);
+		Compra compraSaved = compraRepository.save(compra);
+		Set<ItemCompra> itensCompra = new HashSet<>();
+
+		for (ItemCompraDTO itemCompraDto : compraDTO.getItensCompra()) {
+			ItemCompra itemCompra = ItemCompraMapper.INSTANCE.ItemCompraDtoToItemCompra(itemCompraDto);
+			itemCompra.setCompra(compraSaved);
+			itensCompra.add(itemCompra);
+		}
+		itemCompraRepository.saveAll(itensCompra);
+		compraSaved.setItens(itensCompra);
+		return compraSaved;
 	}
 
 }
