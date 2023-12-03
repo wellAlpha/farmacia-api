@@ -3,6 +3,7 @@ package com.proj.farmacia.services;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import com.proj.farmacia.entities.Compra;
 import com.proj.farmacia.entities.FormaPagamento;
 import com.proj.farmacia.entities.Funcionario;
 import com.proj.farmacia.entities.ItemCompra;
+import com.proj.farmacia.exceptions.NotFoundException;
 import com.proj.farmacia.mappers.ClienteMapper;
 import com.proj.farmacia.mappers.FormaPagamentoMapper;
 import com.proj.farmacia.mappers.FuncionarioMapper;
@@ -28,9 +30,25 @@ public class CompraService {
 	@Autowired ItemCompraRepository itemCompraRepository;
 
 	public List<Compra> list () {
-		var compras = compraRepository.findAll();
-		
+		List<Compra> compras = compraRepository.findAll();
+
 		return compras;
+	}
+
+	public Compra findById (Integer id) {
+		Optional<Compra> compra = compraRepository.findById(id);
+
+		if(compra.isEmpty())
+			throw new NotFoundException("Compra não consta em nossos registros.");
+
+		return compra.get();
+
+	}
+
+	public List<Compra> findByClienteId (Integer id) {
+		List<Compra> compras = compraRepository.findByClienteId(id);
+		return compras;
+
 	}
 
 	public Compra store (CompraDTO compraDTO) {
@@ -52,8 +70,8 @@ public class CompraService {
 			itemCompra.setCompra(compraSaved);
 			itensCompra.add(itemCompra);
 		}
-		itemCompraRepository.saveAll(itensCompra);
-		compraSaved.setItens(itensCompra);
+		var itens = itemCompraRepository.saveAll(itensCompra);
+		compraSaved.setItens(itens);
 		return compraSaved;
 	}
 

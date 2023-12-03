@@ -16,6 +16,10 @@ public class FormaPagamentoDTO {
     @NotNull(message = "id {notnull}")
     @Positive(message = "id {positive}")
 	private Integer id;
+
+    private String descricao;
+
+    private Boolean ativo;
     
 }
 

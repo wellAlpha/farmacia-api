@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.proj.farmacia.entities.Compra;
 import com.proj.farmacia.services.CompraService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 
 @Validated
 @RestController()
@@ -28,6 +30,20 @@ public class CompraController {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(compraService.list());
+	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<Compra> findById (@PathVariable @Positive Integer id) throws Exception {
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(compraService.findById(id));
+	}
+
+	@GetMapping("/clientes/{id}")
+	public ResponseEntity<List<Compra>> findByClienteId (@PathVariable @Positive Integer id) throws Exception {
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(compraService.findByClienteId(id));
 	}
 
 	@PostMapping()

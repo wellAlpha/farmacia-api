@@ -2,9 +2,13 @@ package com.proj.farmacia.entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -18,6 +22,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 @Data
 @Entity
 public class Compra {
@@ -47,8 +52,9 @@ public class Compra {
 	@JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
     private Cliente cliente;
 
-	@OneToMany(cascade = CascadeType.PERSIST,fetch = FetchType.EAGER, mappedBy = "compra", orphanRemoval = false)
-	Set<ItemCompra> itens = new HashSet();
+	@JsonManagedReference
+	@OneToMany(mappedBy = "compra", fetch = FetchType.EAGER)
+	private List<ItemCompra> itens;
 
 	public void setParcelas (Integer parcelas) {
 		if (parcelas != null && parcelas > 1) {
