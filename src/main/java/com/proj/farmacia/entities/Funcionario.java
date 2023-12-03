@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import java.util.Set;
+
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -15,6 +17,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -53,6 +56,9 @@ public class Funcionario {
     // Para evitar futuros problemas com dependência circular.
     // @JsonProperty(access = Access.WRITE_ONLY)
     private Cargo cargo;
+
+	@OneToMany(cascade = CascadeType.DETACH)
+    private Set<Compra> compra;
 	
     public void setCpf(String cpf) {
         this.cpf = cpf.replaceAll("[\\.\\-]", "");

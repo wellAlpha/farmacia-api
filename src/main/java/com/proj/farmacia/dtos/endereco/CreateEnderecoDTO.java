@@ -10,6 +10,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreateEnderecoDTO {
+	private Integer id;
+	
     @NotBlank(message = "logradouro {notblank}")
 	@NotNull(message = "logradouro {notnull}")
 	@Length(max = 100, message = "logradouro {len}")
