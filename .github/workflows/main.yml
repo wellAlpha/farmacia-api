@@ -1,15 +1,12 @@
 name: Build and Deploy
 
 on:
-  push: 
-    branches: 
-      deploy
   pull_request:
     types:
       - closed
 jobs:
   build:
-    #if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
 
     env:
@@ -18,10 +15,7 @@ jobs:
       GCR_IMAGE: ${{ secrets.GCR_IMAGE }}
       GCR_REGION: ${{ secrets.GCR_REGION }}
       CLOUD_RUN_SERVICE_NAME: ${{ secrets.CLOUD_RUN_SERVICE_NAME }}
-      DATABASE_USER: ${{ secrets.DATABASE_USER }}
-      DATABASE_USER_PASSWORD: ${{ secrets.DATABASE_USER_PASSWORD }}
       GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
