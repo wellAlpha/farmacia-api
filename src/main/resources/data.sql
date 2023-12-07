@@ -1,11 +1,11 @@
 
-INSERT INTO cargo (nome) VALUES 
+INSERT IGNORE INTO cargo (nome) VALUES 
 ('Administrador'),
 ('Farmacêutico'),
 ('Vendedor');
 
 
-INSERT INTO tipo_medicacao (descricao) VALUES 
+INSERT IGNORE INTO tipo_medicacao (descricao) VALUES 
 ('Analgésico'),
 ('Antibiótico'),
 ('Antiviral'),
@@ -28,7 +28,7 @@ INSERT INTO tipo_medicacao (descricao) VALUES
 ('Expectorante'),
 ('Outros');
 
-INSERT INTO composicao (descricao) VALUES 
+INSERT IGNORE INTO composicao (descricao) VALUES 
 ('Paracetamol'),
 ('Amoxicilina'),
 ('Oseltamivir'),
@@ -50,7 +50,8 @@ INSERT INTO composicao (descricao) VALUES
 ('Cetirizina'),
 ('Guaifenesina');
 
-INSERT INTO categoria_produto (descricao) VALUES 
+
+INSERT IGNORE INTO categoria_produto (descricao) VALUES 
 ('Cosmético'),
 ('Produtos de Higiene Pessoal'),
 ('Suplemento Vitamínico'),
@@ -71,3 +72,23 @@ INSERT INTO categoria_produto (descricao) VALUES
 ('Produtos para Saúde Sexual'),
 ('Testes de Gravidez e Ovulação'),
 ('Outros');
+
+
+INSERT IGNORE INTO tipo_conteudo (descricao, sigla)
+VALUES
+  ('Comprimidos', 'CP'),
+  ('Mililitros', 'ML'),
+  ('Miligramas', 'MG'),
+  ('Microgramas', 'MCG'),
+  ('Cápsulas', 'CAP'),
+  ('Drágeas', 'DRG'),
+  ('Gotas', 'GT'),
+  ('Unidades', 'UN');
+
+INSERT IGNORE INTO forma_pagamento (descricao)
+VALUES 
+  ('Cartão de Crédito'),
+  ('Cartão de Débito'),
+  ('Pix'),
+  ('Dinheiro');
+  

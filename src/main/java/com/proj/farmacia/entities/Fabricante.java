@@ -1,6 +1,5 @@
 package com.proj.farmacia.entities;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -18,8 +17,8 @@ import lombok.Data;
 @Data
 @Entity
 @Where(clause = "ativo = true")
-@SQLDelete(sql = "UPDATE fornecedor SET ativo = false WHERE id=?;")
-public class Fornecedor {
+@SQLDelete(sql = "UPDATE fabricante SET ativo = false WHERE id=?;")
+public class Fabricante {
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +28,6 @@ public class Fornecedor {
 	private String nome;
 
 	@Column(nullable = false)
-	@ColumnDefault("true")
 	private Boolean ativo = true;
 
     @Column(nullable = false, length = 30)
@@ -39,7 +37,8 @@ public class Fornecedor {
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
-	
+
 	@OneToOne(cascade = CascadeType.DETACH)
     private Medicacao medicacao;
+	
 }

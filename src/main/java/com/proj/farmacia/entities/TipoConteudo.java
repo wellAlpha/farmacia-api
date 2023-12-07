@@ -25,20 +25,23 @@ import lombok.Data;
 @Data
 @Entity
 @Where(clause = "ativo = true")
-@SQLDelete(sql = "UPDATE cargo SET ativo = false WHERE id=?;")
-public class Cargo {
+@SQLDelete(sql = "UPDATE tipo_conteudo SET ativo = false WHERE id=?;")
+public class TipoConteudo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(nullable = false, length = 100, unique = true)
-	private String nome;
+	@Column(nullable = false, length = 20, unique = true)
+	private String descricao;
+
+	@Column(nullable = true, length = 20)
+	private String sigla;
 
 	@Column(nullable = false)
 	@ColumnDefault("true")
 	private Boolean ativo = true;
 
-	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "cargo", fetch = FetchType.LAZY, orphanRemoval = false)
-	private Set<Funcionario> funcionarios = new HashSet<>();
+	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "tipoConteudo", fetch = FetchType.LAZY, orphanRemoval = false)
+	private Set<Medicacao> medicacoes = new HashSet<>();
 	
 }
