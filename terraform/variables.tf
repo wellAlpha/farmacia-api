@@ -1,7 +1,5 @@
-# variables.tf
-variable "credentials_file" {
-  description = "credencial"
-}
+
+
 
 variable "project" {
   description = "project id"
@@ -23,11 +21,4 @@ variable "database_user_password" {
   description = "senha"
 }
 
-variable "service_name" {
-  description = "nome do serviço"
-}
-
-variable "image" {
-  description = "nome da imagem"
-}
 
