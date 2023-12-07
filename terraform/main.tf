@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = jsondecode(var.credentials_file)
+  credentials = file("/home/well/Documents/gpc/total-progress-398820-7c4dfa1901c7.json")
   project     = var.project
   region      = var.region
 }
@@ -18,36 +18,4 @@ resource "google_sql_user" "user" {
   name     = var.database_user
   password = var.database_user_password
   instance = google_sql_database_instance.farmacia.name
-}
-
-resource "google_cloud_run_service" "app" {
-  name     = var.service_name
-  location = var.region
-  template {
-    spec {
-      containers {
-        image = var.image
-        env {
-          name  = "DB_HOST"
-          value = google_sql_database_instance.farmacia.ip_address
-        }
-        env {
-          name  = "DB_PORT"
-          value = 3306
-        }
-        env {
-          name  = "DB_NAME"
-          value = "farmacia"
-        }
-        env {
-          name  = "DB_USERNAME"
-          value = var.database_user
-        }
-        env {
-          name  = "DB_PASSWORD"
-          value = var.database_user_password
-        }
-      }
-    }
-  }
 }

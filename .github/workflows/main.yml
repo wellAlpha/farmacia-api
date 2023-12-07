@@ -1,12 +1,15 @@
 name: Build and Deploy
 
 on:
+  push: 
+    branches: 
+      deploy
   pull_request:
     types:
       - closed
 jobs:
   build:
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    #if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
 
     env:
@@ -37,25 +40,6 @@ jobs:
         run: |
           docker build -t $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA .
           docker push $GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA
-        
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v1
-      
-      # - name: Terraform Init
-      #   working-directory: ./terraform
-      #   run: terraform init
-
-      # - name: Terraform Apply
-      #   working-directory: ./terraform
-      #   run: terraform apply -auto-approve 
-      #     -var="credentials_file=$GCP_CREDENTIALS" 
-      #     -var="project=$GCR_PROJECT" 
-      #     -var="region=$GCR_REGION" 
-      #     -var="database_user=$DATABASE_USER" 
-      #     -var="database_port=$DATABASE_PORT" 
-      #     -var="database_user_password=$DATABASE_USER_PASSWORD" 
-      #     -var="service_name=$CLOUD_RUN_SERVICE_NAME" 
-      #     -var="image=$GCR_HOST/$GCR_PROJECT/$GCR_IMAGE:$GITHUB_SHA"
 
       - name: Deploy to Cloud Run
         run: |
