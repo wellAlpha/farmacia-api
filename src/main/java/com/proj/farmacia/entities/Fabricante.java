@@ -1,15 +1,22 @@
 package com.proj.farmacia.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -38,7 +45,8 @@ public class Fabricante {
 	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
-	@OneToOne(cascade = CascadeType.DETACH)
-    private Medicacao medicacao;
+	@JsonBackReference
+	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "fabricante", fetch = FetchType.LAZY, orphanRemoval = false)
+	private Set<Medicacao> medicacoes = new HashSet<>();
 	
 }

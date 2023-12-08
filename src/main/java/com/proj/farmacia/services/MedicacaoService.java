@@ -33,7 +33,7 @@ public class MedicacaoService {
 		Optional<Medicacao> medicacaoOp = medicacaoRepository.findById(id);
 
 		if (medicacaoOp.isEmpty()) {
-			throw new NotFoundException("Este cliente não está cadastrado.");
+			throw new NotFoundException("Esta medicacao não foi encontrada.");
 		}
 
 		Medicacao medicacao = medicacaoOp.get();
