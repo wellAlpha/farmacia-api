@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import java.util.List;
+
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import lombok.Data;
 
 @Data
@@ -26,4 +29,7 @@ public class TipoMedicacao {
 	@Column(nullable = false)
     @ColumnDefault("true")
 	private Boolean ativo = true;
+
+	@ManyToMany(mappedBy = "tipos")
+	private List<Medicacao> medicacoes;
 }

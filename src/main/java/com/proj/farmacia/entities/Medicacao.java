@@ -60,6 +60,12 @@ public class Medicacao {
         inverseJoinColumns = @JoinColumn(name = "composicao_id"))
 	private List<Composicao> medicacao;	
 
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "medicacao_tipo_medicacao",
+        joinColumns = @JoinColumn(name = "medicacao_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "tipo_medicacao_id", referencedColumnName = "id"))
+	private List<TipoMedicacao> tipos;	
 	
 	@OneToMany(cascade = CascadeType.DETACH)
     private Set<ItemCompra> itens;
