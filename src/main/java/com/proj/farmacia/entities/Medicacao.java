@@ -53,14 +53,14 @@ public class Medicacao {
 	@JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
     private Fornecedor fornecedor;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(
         name = "medicacao_composicao",
         joinColumns = @JoinColumn(name = "medicacao_id"),
         inverseJoinColumns = @JoinColumn(name = "composicao_id"))
-	private List<Composicao> medicacao;	
+	private List<Composicao> composicoes;	
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.DETACH)
     @JoinTable(
         name = "medicacao_tipo_medicacao",
         joinColumns = @JoinColumn(name = "medicacao_id", referencedColumnName = "id"),

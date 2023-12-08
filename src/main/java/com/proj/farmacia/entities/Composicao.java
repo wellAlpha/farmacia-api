@@ -30,6 +30,6 @@ public class Composicao {
 	@ColumnDefault("true")
 	private Boolean ativo = true;
 
-	@ManyToMany(mappedBy = "medicacao")
+	@ManyToMany(mappedBy = "composicoes")
 	private List<Medicacao> medicacaoes;
 }
