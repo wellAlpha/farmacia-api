@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
@@ -41,6 +42,7 @@ public class TipoConteudo {
 	@ColumnDefault("true")
 	private Boolean ativo = true;
 
+	@JsonBackReference
 	@OneToMany(cascade = CascadeType.DETACH, mappedBy = "tipoConteudo", fetch = FetchType.LAZY, orphanRemoval = false)
 	private Set<Medicacao> medicacoes = new HashSet<>();
 	
