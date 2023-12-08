@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.proj.farmacia.dtos.funcionario.CreateFuncionarioDTO;
 import com.proj.farmacia.dtos.medicacao.MedicacaoCreateDTO;
-import com.proj.farmacia.entities.Funcionario;
+import com.proj.farmacia.dtos.medicacao.UpdateMedicacaoDTO;
 import com.proj.farmacia.entities.Medicacao;
 import com.proj.farmacia.services.MedicacaoService;
 
@@ -55,6 +55,10 @@ public class MedicacaoController {
 				.body(medicacaoService.create(medicacaoDto));
 	}
 
-
+	   @PutMapping(path = "/{id}")
+	public ResponseEntity<Medicacao> update(@PathVariable @Positive Integer id, @RequestBody @Valid UpdateMedicacaoDTO medicacaoDto) throws Exception{
+			return ResponseEntity.ok().body(medicacaoService.update(id, medicacaoDto));
+	
+	}
 
 }
