@@ -46,15 +46,17 @@ public class Medicacao {
 	private Boolean ativo = true;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "tipo_conteudo_id", referencedColumnName = "id", nullable = false)
     private TipoConteudo tipoConteudo;
 
-	@OneToOne(cascade = CascadeType.DETACH)
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "fabricante_id", referencedColumnName = "id")
     private Fabricante fabricante;
 
-	@OneToOne(cascade = CascadeType.DETACH)
+	@JsonManagedReference
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
     private Fornecedor fornecedor;
 
