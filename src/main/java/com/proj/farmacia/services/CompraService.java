@@ -16,9 +16,6 @@ import com.proj.farmacia.entities.FormaPagamento;
 import com.proj.farmacia.entities.Funcionario;
 import com.proj.farmacia.entities.ItemCompra;
 import com.proj.farmacia.exceptions.NotFoundException;
-import com.proj.farmacia.mappers.ClienteMapper;
-import com.proj.farmacia.mappers.FormaPagamentoMapper;
-import com.proj.farmacia.mappers.FuncionarioMapper;
 import com.proj.farmacia.mappers.ItemCompraMapper;
 import com.proj.farmacia.repositories.CompraRepository;
 import com.proj.farmacia.repositories.ItemCompraRepository;
@@ -51,9 +48,23 @@ public class CompraService {
 	}
 
 	public Compra store (CompraDTO compraDTO) {
-		Cliente cliente = ClienteMapper.INSTANCE.clienteDtoToCliente(compraDTO.getCliente());
-		FormaPagamento formaPagamento = FormaPagamentoMapper.INSTANCE.formaPagamentoDtoToFormaPagamento(compraDTO.getFormaPagamento());
-		Funcionario funcionario = FuncionarioMapper.INSTANCE.funcionarioDtoToFuncionario(compraDTO.getFuncionario());
+		Cliente cliente = new Cliente();
+		cliente.setId(compraDTO.getCliente().getId());
+		cliente.setCpf(compraDTO.getCliente().getCpf());
+		cliente.setEmail(compraDTO.getCliente().getEmail());
+		cliente.setTelefone(compraDTO.getCliente().getTelefone());
+		cliente.setNome(compraDTO.getCliente().getNome());
+
+		FormaPagamento formaPagamento = new FormaPagamento();
+		formaPagamento.setId(compraDTO.getFormaPagamento().getId());
+		formaPagamento.setDescricao(compraDTO.getFormaPagamento().getDescricao());
+		formaPagamento.setAtivo(compraDTO.getFormaPagamento().getAtivo());
+
+		Funcionario funcionario = new Funcionario();
+		funcionario.setId(compraDTO.getFuncionario().getId());
+		funcionario.setNome(compraDTO.getFuncionario().getNome());
+		funcionario.setCpf(compraDTO.getFuncionario().getCpf());
+		funcionario.setEmail(compraDTO.getFuncionario().getEmail());
 
 		Compra compra = new Compra();
 		compra.setCliente(cliente);
@@ -62,6 +73,7 @@ public class CompraService {
 		compra.setParcelas(compraDTO.getParcelas());
 		compra.setPrecoTotal(compraDTO.getTotal());
 		Compra compraSaved = compraRepository.save(compra);
+
 		Set<ItemCompra> itensCompra = new HashSet<>();
 
 		for (ItemCompraDTO itemCompraDto : compraDTO.getItensCompra()) {
@@ -70,8 +82,10 @@ public class CompraService {
 			itensCompra.add(itemCompra);
 		}
 		var itens = itemCompraRepository.saveAll(itensCompra);
-		compraSaved.setItens(itens);
-		return compraSaved;
+
+		Optional<Compra> compraUpdated = compraRepository.findById(compraSaved.getId());
+
+		return compraUpdated.get();
 	}
 
 }

@@ -51,11 +51,13 @@ public class Cliente implements Serializable{
     private Set<Compra> compra;
 
 	public void setCpf(String cpf) {
-		this.cpf = cpf.replaceAll("[\\.\\-]", "");
+		if(cpf != null)
+			this.cpf = cpf.replaceAll("[\\.\\-]", "");
 	}
 
 	public void setTelefone(String telefone) {
-		this.telefone = telefone.replaceAll("[-()\\s]", "");
+		if(telefone != null)
+			this.telefone = telefone.replaceAll("[-()\\s]", "");
 	}
 
 }
