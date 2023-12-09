@@ -1,5 +1,6 @@
 package com.proj.farmacia.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import lombok.Data;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 @Data
 @Entity
-public class Compra {
+public class Compra implements Serializable{
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

@@ -1,5 +1,6 @@
 package com.proj.farmacia.entities;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ import lombok.Data;
 @Entity
 @Where(clause = "ativo = true")
 @SQLDelete(sql = "UPDATE fornecedor SET ativo = false WHERE id=?;")
-public class Fornecedor {
+public class Fornecedor implements Serializable{
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import java.io.Serializable;
+
 import org.hibernate.annotations.SQLDelete;
 
 import jakarta.persistence.Column;
@@ -12,7 +14,7 @@ import lombok.Data;
 @Data
 @Entity
 @SQLDelete(sql = "UPDATE endereco SET ativo = false WHERE id=?;")
-public class Endereco {
+public class Endereco implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

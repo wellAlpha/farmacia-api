@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import java.io.Serializable;
+
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -15,7 +17,7 @@ import lombok.Data;
 @Entity
 @Where (clause = "ativo = true")
 @SQLDelete (sql = "UPDATE EstoqueMedicacao SET ativo = false WHERE = id?;" )
-public class EstoqueMedicacao {
+public class EstoqueMedicacao implements Serializable{
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
