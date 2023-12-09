@@ -15,6 +15,7 @@ import com.proj.farmacia.entities.Compra;
 import com.proj.farmacia.entities.FormaPagamento;
 import com.proj.farmacia.entities.Funcionario;
 import com.proj.farmacia.entities.ItemCompra;
+import com.proj.farmacia.entities.Medicacao;
 import com.proj.farmacia.exceptions.NotFoundException;
 import com.proj.farmacia.mappers.ItemCompraMapper;
 import com.proj.farmacia.repositories.CompraRepository;
@@ -77,8 +78,18 @@ public class CompraService {
 		Set<ItemCompra> itensCompra = new HashSet<>();
 
 		for (ItemCompraDTO itemCompraDto : compraDTO.getItensCompra()) {
-			ItemCompra itemCompra = ItemCompraMapper.INSTANCE.ItemCompraDtoToItemCompra(itemCompraDto);
+			ItemCompra itemCompra = new ItemCompra();
+			
+
+			itemCompra.setPrecoUnitario(itemCompraDto.getPrecoUnitario());
 			itemCompra.setCompra(compraSaved);
+			itemCompra.setQuantidade(itemCompraDto.getQuantidade());
+	
+			Medicacao med = new Medicacao();
+			med.setId(itemCompraDto.getMedicacao().getId());
+			med.setNome(itemCompraDto.getMedicacao().getNome());
+			itemCompra.setMedicacao(med);
+
 			itensCompra.add(itemCompra);
 		}
 		var itens = itemCompraRepository.saveAll(itensCompra);

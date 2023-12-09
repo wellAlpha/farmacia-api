@@ -15,4 +15,5 @@ public class MedicacaoDTO {
     @Positive(message = "id {positive}")
 	private Integer id;
 
+	private String nome;
 }
