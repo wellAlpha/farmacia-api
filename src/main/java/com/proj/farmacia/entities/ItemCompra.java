@@ -1,5 +1,7 @@
 package com.proj.farmacia.entities;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -17,7 +19,7 @@ import lombok.Data;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 @Data
 @Entity
-public class ItemCompra {
+public class ItemCompra implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
