@@ -27,9 +27,13 @@ public class MedicacaoCreateDTO {
 	@Length(max = 254, message = "nome {len}") 
     private String nome;
 
-    @Positive(message = "deve ser numero inteiro positivo")
+    @Positive(message = "conteúdo deve ser numero inteiro positivo")
 	@NotNull(message = "nome {notnull}")
     private Integer conteudo;
+
+    @Positive(message = "preço deve ser numero inteiro positivo")
+	@NotNull(message = "preço {notnull}")
+    private Double preco;
 
     @NotNull(message = "tipoConteudo {notnull}")
     @Valid

@@ -48,6 +48,7 @@ public class MedicacaoService {
 
 		medicacao.setNome(medicacaoCreateDto.getNome());
 		medicacao.setConteudo(medicacaoCreateDto.getConteudo());
+		medicacao.setPreco(medicacaoCreateDto.getPreco());
 
 		TipoConteudo tipoConteudo = new TipoConteudo();
 
@@ -114,6 +115,7 @@ public class MedicacaoService {
 		
 		medicacao.setNome(medicacaoUpdateDto.getNome());
 		medicacao.setConteudo(medicacaoUpdateDto.getConteudo());
+		medicacao.setPreco(medicacaoUpdateDto.getPreco());
 
 		TipoConteudo tipoConteudo = new TipoConteudo();
 
