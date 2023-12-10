@@ -32,6 +32,10 @@ public class UpdateMedicacaoDTO {
 	@NotNull(message = "nome {notnull}")
     private Integer conteudo;
 
+    @Positive(message = "preço deve ser numero inteiro positivo")
+	@NotNull(message = "preço {notnull}")
+    private Double preco;
+
     @NotNull(message = "tipoConteudo {notnull}")
     @Valid
     private TipoConteudoDTO tipoConteudo;

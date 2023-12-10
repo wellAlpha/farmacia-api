@@ -23,7 +23,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
@@ -41,6 +40,9 @@ public class Medicacao implements Serializable{
 
 	@Column(nullable = false)
 	private String nome; 
+
+	@Column(nullable = false)
+	private Double preco;
 
     @Column(nullable = false)
 	@ColumnDefault("true")
