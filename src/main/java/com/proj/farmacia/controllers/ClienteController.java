@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proj.farmacia.dtos.cliente.CreateClienteDTO;
@@ -29,34 +30,44 @@ import jakarta.validation.constraints.Positive;
 @RestController()
 @RequestMapping("/api/clientes")
 public class ClienteController {
-@Autowired ClienteService clienteService;
-	
+	@Autowired
+	ClienteService clienteService;
+
 	@GetMapping()
-	public ResponseEntity<List<Cliente>> listClientes () throws Exception {
+	public ResponseEntity<List<Cliente>> listClientes() throws Exception {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(clienteService.listAtivos());
 	}
-	
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<Cliente> get(@PathVariable @Positive Integer id) throws Exception{
-			return ResponseEntity.ok().body(clienteService.get(id));
+
+	@GetMapping("/search")
+	public ResponseEntity<List<Cliente>> search(@RequestParam(name = "cpf") String cpf) throws Exception {
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(clienteService.search(cpf));
 	}
+
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Cliente> get(@PathVariable @Positive Integer id) throws Exception {
+		return ResponseEntity.ok().body(clienteService.get(id));
+	}
+
 	@PostMapping()
-	public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDTO clienteDto) throws Exception{
-			return ResponseEntity
+	public ResponseEntity<Cliente> create(@RequestBody @Valid CreateClienteDTO clienteDto) throws Exception {
+		return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(clienteService.create(clienteDto));
 	}
 
 	@PutMapping(path = "/{id}")
-	public ResponseEntity<Cliente> update(@PathVariable @Positive Integer id, @RequestBody @Valid UpdateClienteDTO clienteDto) throws Exception{
-			return ResponseEntity.ok().body(clienteService.update(id, clienteDto));
+	public ResponseEntity<Cliente> update(@PathVariable @Positive Integer id,
+			@RequestBody @Valid UpdateClienteDTO clienteDto) throws Exception {
+		return ResponseEntity.ok().body(clienteService.update(id, clienteDto));
 	}
 
 	@DeleteMapping(path = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable @Positive Integer id) throws Exception{
-			clienteService.delete(id);
-			return ResponseEntity.noContent().<Void>build();
+	public ResponseEntity<Void> delete(@PathVariable @Positive Integer id) throws Exception {
+		clienteService.delete(id);
+		return ResponseEntity.noContent().<Void>build();
 	}
 }

@@ -24,6 +24,12 @@ public class ClienteService {
 
 		return clientes;
 	}
+
+	public List<Cliente> search (String cpf) {
+		List<Cliente> clientes = clienteRepository.findByCpfContains(cpf);
+
+		return clientes;
+	}
 	
 	public Cliente get (Integer id) {
 		Optional<Cliente> clienteOp = clienteRepository.findById(id);
