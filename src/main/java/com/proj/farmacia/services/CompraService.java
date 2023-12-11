@@ -49,28 +49,35 @@ public class CompraService {
 	}
 
 	public Compra store (CompraDTO compraDTO) {
-		Cliente cliente = new Cliente();
-		cliente.setId(compraDTO.getCliente().getId());
-		cliente.setCpf(compraDTO.getCliente().getCpf());
-		cliente.setEmail(compraDTO.getCliente().getEmail());
-		cliente.setTelefone(compraDTO.getCliente().getTelefone());
-		cliente.setNome(compraDTO.getCliente().getNome());
+		Compra compra = new Compra();
+		if(compraDTO.getCliente() != null){
+			Cliente cliente = new Cliente();
+
+			cliente.setId(compraDTO.getCliente().getId());
+			cliente.setCpf(compraDTO.getCliente().getCpf());
+			cliente.setEmail(compraDTO.getCliente().getEmail());
+			cliente.setTelefone(compraDTO.getCliente().getTelefone());
+			cliente.setNome(compraDTO.getCliente().getNome());
+			compra.setCliente(cliente);
+		}
+		
 
 		FormaPagamento formaPagamento = new FormaPagamento();
 		formaPagamento.setId(compraDTO.getFormaPagamento().getId());
 		formaPagamento.setDescricao(compraDTO.getFormaPagamento().getDescricao());
 		formaPagamento.setAtivo(compraDTO.getFormaPagamento().getAtivo());
-
-		Funcionario funcionario = new Funcionario();
-		funcionario.setId(compraDTO.getFuncionario().getId());
-		funcionario.setNome(compraDTO.getFuncionario().getNome());
-		funcionario.setCpf(compraDTO.getFuncionario().getCpf());
-		funcionario.setEmail(compraDTO.getFuncionario().getEmail());
-
-		Compra compra = new Compra();
-		compra.setCliente(cliente);
 		compra.setFormaPagamento(formaPagamento);
-		compra.setFuncionario(funcionario);
+
+		if(compraDTO.getFuncionario() != null) {
+			Funcionario funcionario = new Funcionario();
+			funcionario.setId(compraDTO.getFuncionario().getId());
+			funcionario.setNome(compraDTO.getFuncionario().getNome());
+			funcionario.setCpf(compraDTO.getFuncionario().getCpf());
+			funcionario.setEmail(compraDTO.getFuncionario().getEmail());
+
+			compra.setFuncionario(funcionario);
+		}
+
 		compra.setParcelas(compraDTO.getParcelas());
 		compra.setPrecoTotal(compraDTO.getTotal());
 		Compra compraSaved = compraRepository.save(compra);
@@ -92,6 +99,7 @@ public class CompraService {
 
 			itensCompra.add(itemCompra);
 		}
+
 		var itens = itemCompraRepository.saveAll(itensCompra);
 
 		Optional<Compra> compraUpdated = compraRepository.findById(compraSaved.getId());

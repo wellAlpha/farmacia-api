@@ -42,11 +42,11 @@ public class Compra implements Serializable{
     private FormaPagamento formaPagamento;
 
 	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "funcionario_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "funcionario_id", referencedColumnName = "id", nullable = true)
     private Funcionario funcionario;
 
 	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-	@JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "cliente_id", referencedColumnName = "id", nullable = true)
     private Cliente cliente;
 
 	@JsonManagedReference
