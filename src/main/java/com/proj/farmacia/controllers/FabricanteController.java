@@ -28,7 +28,6 @@ import jakarta.validation.constraints.Positive;
 @Validated
 @RestController()
 @RequestMapping("/api/fabricantes")
-
 public class FabricanteController {
 @Autowired FabricanteService fabricanteService;
 
