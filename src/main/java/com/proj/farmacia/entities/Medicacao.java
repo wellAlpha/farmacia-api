@@ -49,18 +49,18 @@ public class Medicacao implements Serializable{
 	private Boolean ativo = true;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "tipo_conteudo_id", referencedColumnName = "id", nullable = false)
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "tipo_conteudo_id", referencedColumnName = "id", nullable = true)
     private TipoConteudo tipoConteudo;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "fabricante_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fabricante_id", referencedColumnName = "id", nullable = true)
     private Fabricante fabricante;
 
 	@JsonManagedReference
-	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JoinColumn(name = "fornecedor_id", referencedColumnName = "id", nullable = true)
     private Fornecedor fornecedor;
 
 	@JsonManagedReference

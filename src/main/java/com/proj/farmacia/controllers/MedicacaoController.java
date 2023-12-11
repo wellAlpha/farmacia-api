@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proj.farmacia.dtos.medicacao.MedicacaoCreateDTO;
 import com.proj.farmacia.dtos.medicacao.UpdateMedicacaoDTO;
-import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.entities.Medicacao;
 import com.proj.farmacia.services.MedicacaoService;
 
