@@ -19,14 +19,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CompraDTO {
     private int parcelas;
+
     @Valid
-    @NotNull(message = "cliente {notnull}")
     private ClienteDTO cliente;
+    
     @Valid
     @NotNull(message = "formaPagamento {notnull}")
     private FormaPagamentoDTO formaPagamento;
+
     @Valid
-    @NotNull(message = "funcionario {notnull}")
     private FuncionarioDTO funcionario;
 
     @Valid
