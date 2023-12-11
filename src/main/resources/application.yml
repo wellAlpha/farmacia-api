@@ -14,7 +14,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: ${DB_STR:update} # Defina a estratégia de criação/atualização das tabelas (pode ser 'create', 'update', etc.)            
+      ddl-auto: ${DB_STR:create} # Defina a estratégia de criação/atualização das tabelas (pode ser 'create', 'update', etc.)            
     show-sql: true # Ative para mostrar as consultas SQL no console (útil para depuração)
     defer-datasource-initialization: true # Inicializando dataSource depois da inserção
 server:

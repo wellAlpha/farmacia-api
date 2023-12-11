@@ -36,14 +36,14 @@ public class MedicacaoService {
 		Optional<Medicacao> medicacaoOp = medicacaoRepository.findById(id);
 
 		if (medicacaoOp.isEmpty()) {
-			throw new NotFoundException("Esta medicacao não foi encontrada.");
+			throw new NotFoundException("Esta medicação não foi encontrada.");
 		}
 
 		Medicacao medicacao = medicacaoOp.get();
 		return medicacao;
 	}
 
-	public List<Medicacao> search (String nome) {
+	public List<Medicacao> search(String nome) {
 		List<Medicacao> medicacoes = medicacaoRepository.findByNomeContains(nome);
 
 		return medicacoes;
@@ -64,45 +64,53 @@ public class MedicacaoService {
 
 		medicacao.setTipoConteudo(tipoConteudo);
 
-		Fabricante fabricante = new Fabricante();
+		if (medicacaoCreateDto.getFabricante() != null) {
+			Fabricante fabricante = new Fabricante();
 
-		fabricante.setNome(medicacaoCreateDto.getFabricante().getNome());
-		fabricante.setId(medicacaoCreateDto.getFabricante().getId());
+			fabricante.setNome(medicacaoCreateDto.getFabricante().getNome());
+			fabricante.setId(medicacaoCreateDto.getFabricante().getId());
 
-		medicacao.setFabricante(fabricante);
-
-		Fornecedor fornecedor = new Fornecedor();
-
-		fornecedor.setNome(medicacaoCreateDto.getFornecedor().getNome());
-		fornecedor.setId(medicacaoCreateDto.getFornecedor().getId());
-
-		medicacao.setFornecedor(fornecedor);
-
-		List<Composicao> composicoes = new ArrayList<>();
-
-		for (ComposicaoDTO composicaoDto : medicacaoCreateDto.getComposicoes()) {
-
-			Composicao composicao = new Composicao();
-
-			composicao.setId(composicaoDto.getId());
-			composicao.setDescricao(composicaoDto.getDescricao());
-			composicoes.add(composicao);
+			medicacao.setFabricante(fabricante);
 		}
 
-		medicacao.setComposicoes(composicoes);
+		if (medicacaoCreateDto.getFornecedor() != null) {
+			Fornecedor fornecedor = new Fornecedor();
 
-		List<TipoMedicacao> tiposMedicacaoes = new ArrayList<>();
+			fornecedor.setNome(medicacaoCreateDto.getFornecedor().getNome());
+			fornecedor.setId(medicacaoCreateDto.getFornecedor().getId());
 
-		for (TipoMedicacaoDTO tipoMedicacaoDTO : medicacaoCreateDto.getTipoMedicacao()) {
-
-			TipoMedicacao tipoMedicacao = new TipoMedicacao();
-
-			tipoMedicacao.setId(tipoMedicacaoDTO.getId());
-			tipoMedicacao.setDescricao(tipoMedicacaoDTO.getDescricao());
-			tiposMedicacaoes.add(tipoMedicacao);
+			medicacao.setFornecedor(fornecedor);
 		}
 
-		medicacao.setTipos(tiposMedicacaoes);
+		if (medicacaoCreateDto.getComposicoes() != null && medicacaoCreateDto.getComposicoes().size() > 0) {
+			List<Composicao> composicoes = new ArrayList<>();
+
+			for (ComposicaoDTO composicaoDto : medicacaoCreateDto.getComposicoes()) {
+
+				Composicao composicao = new Composicao();
+
+				composicao.setId(composicaoDto.getId());
+				composicao.setDescricao(composicaoDto.getDescricao());
+				composicoes.add(composicao);
+			}
+
+			medicacao.setComposicoes(composicoes);
+		}
+
+		if (medicacaoCreateDto.getTipoMedicacao() != null && medicacaoCreateDto.getTipoMedicacao().size() > 0) {
+			List<TipoMedicacao> tiposMedicacaoes = new ArrayList<>();
+
+			for (TipoMedicacaoDTO tipoMedicacaoDTO : medicacaoCreateDto.getTipoMedicacao()) {
+
+				TipoMedicacao tipoMedicacao = new TipoMedicacao();
+
+				tipoMedicacao.setId(tipoMedicacaoDTO.getId());
+				tipoMedicacao.setDescricao(tipoMedicacaoDTO.getDescricao());
+				tiposMedicacaoes.add(tipoMedicacao);
+			}
+
+			medicacao.setTipos(tiposMedicacaoes);
+		}
 
 		Medicacao novaMedicacao = medicacaoRepository.save(medicacao);
 
@@ -119,7 +127,6 @@ public class MedicacaoService {
 
 		Medicacao medicacao = medicacaoOp.get();
 
-		
 		medicacao.setNome(medicacaoUpdateDto.getNome());
 		medicacao.setConteudo(medicacaoUpdateDto.getConteudo());
 		medicacao.setPreco(medicacaoUpdateDto.getPreco());
@@ -131,50 +138,58 @@ public class MedicacaoService {
 
 		medicacao.setTipoConteudo(tipoConteudo);
 
-		Fabricante fabricante = new Fabricante();
+		if (medicacaoUpdateDto.getFabricante() != null) {
+			Fabricante fabricante = new Fabricante();
 
-		fabricante.setNome(medicacaoUpdateDto.getFabricante().getNome());
-		fabricante.setId(medicacaoUpdateDto.getFabricante().getId());
+			fabricante.setNome(medicacaoUpdateDto.getFabricante().getNome());
+			fabricante.setId(medicacaoUpdateDto.getFabricante().getId());
 
-		medicacao.setFabricante(fabricante);
-
-		Fornecedor fornecedor = new Fornecedor();
-
-		fornecedor.setNome(medicacaoUpdateDto.getFornecedor().getNome());
-		fornecedor.setId(medicacaoUpdateDto.getFabricante().getId());
-
-		medicacao.setFornecedor(fornecedor);
-
-		List<Composicao> composicoes = new ArrayList<>();
-
-		for (ComposicaoDTO composicaoDto : medicacaoUpdateDto.getComposicoes()) {
-
-			Composicao composicao = new Composicao();
-
-			composicao.setId(composicaoDto.getId());
-			composicao.setDescricao(composicaoDto.getDescricao());
-			composicoes.add(composicao);
+			medicacao.setFabricante(fabricante);
 		}
 
-		medicacao.setComposicoes(composicoes);
+		if (medicacaoUpdateDto.getFornecedor() != null) {
+			Fornecedor fornecedor = new Fornecedor();
 
-		List<TipoMedicacao> tiposMedicacaoes = new ArrayList<>();
+			fornecedor.setNome(medicacaoUpdateDto.getFornecedor().getNome());
+			fornecedor.setId(medicacaoUpdateDto.getFornecedor().getId());
 
-		for (TipoMedicacaoDTO tipoMedicacaoDTO : medicacaoUpdateDto.getTipoMedicacao()) {
-
-			TipoMedicacao tipoMedicacao = new TipoMedicacao();
-
-			tipoMedicacao.setId(tipoMedicacaoDTO.getId());
-			tipoMedicacao.setDescricao(tipoMedicacaoDTO.getDescricao());
-			tiposMedicacaoes.add(tipoMedicacao);
+			medicacao.setFornecedor(fornecedor);
 		}
 
-		medicacao.setTipos(tiposMedicacaoes);
+		if (medicacaoUpdateDto.getComposicoes() != null && medicacaoUpdateDto.getComposicoes().size() > 0) {
+			List<Composicao> composicoes = new ArrayList<>();
+
+			for (ComposicaoDTO composicaoDto : medicacaoUpdateDto.getComposicoes()) {
+
+				Composicao composicao = new Composicao();
+
+				composicao.setId(composicaoDto.getId());
+				composicao.setDescricao(composicaoDto.getDescricao());
+				composicoes.add(composicao);
+			}
+
+			medicacao.setComposicoes(composicoes);
+		}
+
+		if (medicacaoUpdateDto.getTipoMedicacao() != null && medicacaoUpdateDto.getTipoMedicacao().size() > 0) {
+			List<TipoMedicacao> tiposMedicacaoes = new ArrayList<>();
+
+			for (TipoMedicacaoDTO tipoMedicacaoDTO : medicacaoUpdateDto.getTipoMedicacao()) {
+
+				TipoMedicacao tipoMedicacao = new TipoMedicacao();
+
+				tipoMedicacao.setId(tipoMedicacaoDTO.getId());
+				tipoMedicacao.setDescricao(tipoMedicacaoDTO.getDescricao());
+				tiposMedicacaoes.add(tipoMedicacao);
+			}
+
+			medicacao.setTipos(tiposMedicacaoes);
+		}
 
 		Medicacao novaMedicacao = medicacaoRepository.save(medicacao);
 
 		return novaMedicacao;
-		
+
 	}
 
 	public void delete(Integer id) {

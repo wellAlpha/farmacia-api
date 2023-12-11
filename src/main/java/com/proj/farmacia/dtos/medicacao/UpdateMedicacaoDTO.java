@@ -36,26 +36,20 @@ public class UpdateMedicacaoDTO {
 	@NotNull(message = "preço {notnull}")
     private Double preco;
 
-    @NotNull(message = "tipoConteudo {notnull}")
     @Valid
     private TipoConteudoDTO tipoConteudo;
 
-    @NotNull(message = "fabricante {notnull}")
+   
     @Valid
     private FabricanteDto fabricante;
 
-    @NotNull(message = "fornecedor {notnull}")
     @Valid
     private FornecedorDto fornecedor;
 
     @Valid
-    @NotNull(message = "composicoes {notnull}")
-    @NotEmpty(message = "composicoes {notempty}")
     private List<ComposicaoDTO> composicoes;
 
     @Valid
-    @NotNull(message = "tipoMedicacao {notnull}")
-    @NotEmpty(message = "tipoMedicacao {notempty}")
     private List<TipoMedicacaoDTO> tipoMedicacao;
 
     
