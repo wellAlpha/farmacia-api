@@ -11,6 +11,7 @@ import com.proj.farmacia.dtos.TipoMedicacao.TipoMedicacaoDTO;
 import com.proj.farmacia.dtos.composicao.ComposicaoDTO;
 import com.proj.farmacia.dtos.medicacao.MedicacaoCreateDTO;
 import com.proj.farmacia.dtos.medicacao.UpdateMedicacaoDTO;
+import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.entities.Composicao;
 import com.proj.farmacia.entities.Fabricante;
 import com.proj.farmacia.entities.Fornecedor;
@@ -40,6 +41,12 @@ public class MedicacaoService {
 
 		Medicacao medicacao = medicacaoOp.get();
 		return medicacao;
+	}
+
+	public List<Medicacao> search (String nome) {
+		List<Medicacao> medicacoes = medicacaoRepository.findByNomeContains(nome);
+
+		return medicacoes;
 	}
 
 	public Medicacao create(MedicacaoCreateDTO medicacaoCreateDto) {
