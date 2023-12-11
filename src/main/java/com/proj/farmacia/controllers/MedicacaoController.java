@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proj.farmacia.dtos.medicacao.MedicacaoCreateDTO;
 import com.proj.farmacia.dtos.medicacao.UpdateMedicacaoDTO;
+import com.proj.farmacia.entities.Cliente;
 import com.proj.farmacia.entities.Medicacao;
 import com.proj.farmacia.services.MedicacaoService;
 
@@ -29,36 +31,46 @@ import jakarta.validation.constraints.Positive;
 @RestController()
 @RequestMapping("/api/medicacoes")
 public class MedicacaoController {
-    @Autowired MedicacaoService medicacaoService;
+	@Autowired
+	MedicacaoService medicacaoService;
 
-@GetMapping 
-    public ResponseEntity<List<Medicacao>> listMedicacoes () throws Exception {
+	@GetMapping
+	public ResponseEntity<List<Medicacao>> listMedicacoes() throws Exception {
 		return ResponseEntity
 				.status(HttpStatus.OK)
 				.body(medicacaoService.listAtivos());
-	} 
-	@GetMapping(path = "/{id}")
-	public ResponseEntity<Medicacao> get(@PathVariable @Positive Integer id) throws Exception{
-			return ResponseEntity.ok().body(medicacaoService.get(id));
 	}
 
-    @DeleteMapping(path = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable @Positive Integer id) throws Exception{
-			medicacaoService.delete(id);
-			return ResponseEntity.noContent().<Void>build();
+	@GetMapping(path = "/{id}")
+	public ResponseEntity<Medicacao> get(@PathVariable @Positive Integer id) throws Exception {
+		return ResponseEntity.ok().body(medicacaoService.get(id));
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<List<Medicacao>> search(@RequestParam(name = "nome") String nome) throws Exception {
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(medicacaoService.search(nome));
+	}
+
+	@DeleteMapping(path = "/{id}")
+	public ResponseEntity<Void> delete(@PathVariable @Positive Integer id) throws Exception {
+		medicacaoService.delete(id);
+		return ResponseEntity.noContent().<Void>build();
 	}
 
 	@PostMapping()
-	public ResponseEntity<Medicacao> create(@RequestBody @Valid MedicacaoCreateDTO medicacaoDto) throws Exception{
-			return ResponseEntity
+	public ResponseEntity<Medicacao> create(@RequestBody @Valid MedicacaoCreateDTO medicacaoDto) throws Exception {
+		return ResponseEntity
 				.status(HttpStatus.CREATED)
 				.body(medicacaoService.create(medicacaoDto));
 	}
 
-	   @PutMapping(path = "/{id}")
-	public ResponseEntity<Medicacao> update(@PathVariable @Positive Integer id, @RequestBody @Valid UpdateMedicacaoDTO medicacaoDto) throws Exception{
-			return ResponseEntity.ok().body(medicacaoService.update(id, medicacaoDto));
-	
+	@PutMapping(path = "/{id}")
+	public ResponseEntity<Medicacao> update(@PathVariable @Positive Integer id,
+			@RequestBody @Valid UpdateMedicacaoDTO medicacaoDto) throws Exception {
+		return ResponseEntity.ok().body(medicacaoService.update(id, medicacaoDto));
+
 	}
 
 }
