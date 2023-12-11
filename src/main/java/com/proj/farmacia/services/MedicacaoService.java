@@ -67,7 +67,7 @@ public class MedicacaoService {
 		Fornecedor fornecedor = new Fornecedor();
 
 		fornecedor.setNome(medicacaoCreateDto.getFornecedor().getNome());
-		fornecedor.setId(medicacaoCreateDto.getFabricante().getId());
+		fornecedor.setId(medicacaoCreateDto.getFornecedor().getId());
 
 		medicacao.setFornecedor(fornecedor);
 
